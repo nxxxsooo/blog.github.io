@@ -1,13 +1,15 @@
 ---
-title: "Search"
-slug: "search"
-layout: "search"
+title: Search
+slug: search
+layout: search
 outputs:
     - html
     - json
 menu:
     main:
         weight: 3
-        params: 
+        params:
             icon: search
+tags:
+    - system
 ---
