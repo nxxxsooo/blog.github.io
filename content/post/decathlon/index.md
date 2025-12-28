@@ -7,7 +7,7 @@ date = "2024-05-30T00:00:00+00:00"
 image = "decathlon-edr-cf105.jpg"
 categories = [ "Life" ]
 tags = [ "no-tag" ]
-preview = "/nxxxsooo.github.io/content/post/decathlon/decathlon-edr-cf105.jpg"
+preview = "/content/post/decathlon/decathlon-edr-cf105.jpg"
 
 [[links]]
 title = "Van Rysel EDR CF105"
@@ -23,5 +23,3 @@ image = "https://pixl.decathlon.com.cn/p1985864/k$73de9ea5bfe4e6c229a41f4d3b9634
 这是一辆耐力圈刹车，喜欢圈刹车的轻量，好维护和稍有滞后的刹车手感。平时匀速25km/h的老年人正好合适。
 
 ![Van Rysel EDR CF105](decathlon-edr-cf105.jpg "Van Rysel EDR CF105")
-
-

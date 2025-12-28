@@ -2,8 +2,8 @@
   "$schema": "https://frontmatter.codes/frontmatter.schema.json",
   "frontMatter.content.pageFolders": [
     {
-      "path": "[[workspace]]/content",
-      "title": "content"
+      "title": "post",
+      "path": "[[workspace]]/content/post"
     }
   ],
   "frontMatter.content.publicFolder": "static",
