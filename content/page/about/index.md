@@ -3,7 +3,7 @@ title: About
 links:
   - title: About me
     description: IT & Digital Transformation Director | 12 Years of Experience
-    date: 2025-12-31
+    date: 2025-12-30
     website: https://mjshao.fun
     image: /favicon.ico
 menu:
