@@ -22,12 +22,3 @@ url = "https://x.com/nxxxsooo"
 
 [social.params]
 icon = "brand-x"
-
-
-[[main]]
-    identifier = "about"
-    name = "About"
-    url = "/about/"
-    weight = 4
-    [main.params]
-        icon = "user"
