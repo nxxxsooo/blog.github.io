@@ -3,7 +3,7 @@ title: mynas
 description: ""
 date: 2026-01-04T17:28:56.590Z
 preview: ""
-draft: false
+draft: true
 tags: []
 categories: []
 links: ""
