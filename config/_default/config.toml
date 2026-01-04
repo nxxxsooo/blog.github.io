@@ -16,3 +16,11 @@ disqusShortname = "hugo-theme-stack"
 
 [pagination]
 pagerSize = 5
+
+[[menu.main]]
+identifier = "cv"
+name = "CV"
+url = "https://mjshao.fun"
+weight = 5
+[menu.main.params]
+icon = "user"
