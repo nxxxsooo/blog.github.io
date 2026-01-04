@@ -18,8 +18,8 @@ disqusShortname = "hugo-theme-stack"
 pagerSize = 5
 
 [[menu.main]]
-identifier = "cv"
-name = "CV"
+identifier = "about"
+name = "About"
 url = "https://mjshao.fun"
 weight = 5
 [menu.main.params]
