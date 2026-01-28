@@ -4,7 +4,7 @@ title: "MDX 转 Apple Dictionary 完整指南"
 description: "将 MDict (.mdx/.mdd) 词典转换为 macOS Apple Dictionary 格式"
 slug: "mdx-to-apple-dictionary"
 date: 2026-01-26T16:13:22+08:00
-image: cover.png
+image: cover.jpg
 categories:
     - Tech
 tags:
