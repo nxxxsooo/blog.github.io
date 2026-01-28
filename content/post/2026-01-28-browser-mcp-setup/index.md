@@ -13,6 +13,8 @@ tags:
     - Browser Automation
 ---
 
+![Browser MCP](cover.png "Browser MCP")
+
 > MCP server + Chrome extension for AI-powered browser automation
 
 ## Overview
