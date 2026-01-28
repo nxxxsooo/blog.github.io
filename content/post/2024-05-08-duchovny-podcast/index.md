@@ -9,7 +9,6 @@ categories:
     - Life
 tags:
     - Podcast
-weight: 1
 links:
     - title: Fail Better with David Duchovny
       description: 点击前往 Pocket Casts 听

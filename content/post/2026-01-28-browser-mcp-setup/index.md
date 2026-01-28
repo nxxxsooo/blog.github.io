@@ -4,6 +4,7 @@ title: "Browser MCP - Complete Setup Guide"
 description: "MCP server + Chrome extension for AI-powered browser automation"
 slug: "browser-mcp-setup"
 date: 2026-01-28T00:00:00+08:00
+image: cover.svg
 categories:
     - Tech
 tags:
