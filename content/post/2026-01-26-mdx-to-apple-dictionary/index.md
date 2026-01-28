@@ -4,6 +4,7 @@ title: "MDX 转 Apple Dictionary 完整指南"
 description: "将 MDict (.mdx/.mdd) 词典转换为 macOS Apple Dictionary 格式"
 slug: "mdx-to-apple-dictionary"
 date: 2026-01-26T16:13:22+08:00
+image: cover.png
 categories:
     - Tech
 tags:
@@ -14,7 +15,26 @@ tags:
 
 将 MDict (.mdx/.mdd) 词典转换为 macOS Apple Dictionary 格式。
 
-## 工具准备
+## 推荐工具
+
+我写了一个自动化脚本 [mdx2apple](https://github.com/nxxxsooo/mdx2apple)，可以一键完成整个转换流程：
+
+```bash
+git clone https://github.com/nxxxsooo/mdx2apple.git
+cd mdx2apple
+pip install pyglossary lxml beautifulsoup4 html5lib
+
+# 一键转换并安装
+python mdx2apple.py /path/to/dictionary.mdx --install
+```
+
+如果你想了解手动转换的原理，继续往下看。
+
+---
+
+## 手动转换指南
+
+### 工具准备
 
 ### 1. 安装 pyglossary
 ```bash
