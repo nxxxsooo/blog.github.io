@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Feishu on Mingjian</title><link>https://blog.mjshao.fun/tags/feishu/</link><description>Recent content in Feishu on Mingjian</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 03 Feb 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://blog.mjshao.fun/tags/feishu/index.xml" rel="self" type="application/rss+xml"/><item><title>Feishu: Markdown → Wiki Pipeline</title><link>https://blog.mjshao.fun/p/feishu-markdown-wiki/</link><pubDate>Tue, 03 Feb 2026 00:00:00 +0800</pubDate><guid>https://blog.mjshao.fun/p/feishu-markdown-wiki/</guid><description>&lt;img src="https://blog.mjshao.fun/p/feishu-markdown-wiki/cover.png" alt="Featured image of post Feishu: Markdown → Wiki Pipeline" /&gt;&lt;blockquote&gt;
+&lt;p&gt;End-to-end workflow for uploading local markdown to Feishu Wiki with mermaid diagram support.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="overview"&gt;Overview
+&lt;/h2&gt;&lt;p&gt;Feishu has &lt;strong&gt;no direct &amp;ldquo;upload to wiki&amp;rdquo; API&lt;/strong&gt;. You must go through cloud docs first, following a 4-step pipeline:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Step&lt;/th&gt;
+&lt;th&gt;Action&lt;/th&gt;
+&lt;th&gt;Auth&lt;/th&gt;
+&lt;th&gt;Notes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Import Markdown → Cloud Doc&lt;/td&gt;
+&lt;td&gt;TAT or UAT&lt;/td&gt;
+&lt;td&gt;Creates doc owned by app&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;Transfer ownership to user&lt;/td&gt;
+&lt;td&gt;TAT&lt;/td&gt;
+&lt;td&gt;Required for wiki move&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;Move Cloud Doc → Wiki Node&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Sleep 3s after step 2!&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;Fix Mermaid blocks&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;td&gt;Replace type 2 → type 40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="prerequisites"&gt;Prerequisites
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Feishu App with &lt;code&gt;wiki&lt;/code&gt;, &lt;code&gt;docx&lt;/code&gt;, &lt;code&gt;drive&lt;/code&gt; scopes&lt;/li&gt;
+&lt;li&gt;UAT (User Access Token) — refreshed via OAuth flow&lt;/li&gt;
+&lt;li&gt;TAT (Tenant Access Token) — obtained via app credentials&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Config&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;APP_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;cli_xxxxxxxxxxxxx&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;APP_SECRET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;your_app_secret&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;WIKI_SPACE_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;your_wiki_space_id&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;PARENT_NODE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;your_parent_node_token&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;USER_OPEN_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;your_user_open_id&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Get TAT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;TAT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;curl -s -X POST &lt;span class="s1"&gt;&amp;#39;https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s1"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;app_id\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$APP_ID&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;,\&amp;#34;app_secret\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$APP_SECRET&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;}&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; python3 -c &lt;span class="s2"&gt;&amp;#34;import json,sys; print(json.load(sys.stdin)[&amp;#39;tenant_access_token&amp;#39;])&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Get UAT from cached token&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;UAT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;python3 -c &lt;span class="s2"&gt;&amp;#34;import json; print(json.load(open(&amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/.feishu_token_cache.json&amp;#39;))[&amp;#39;access_token&amp;#39;])&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="step-1-import-markdown--cloud-doc"&gt;Step 1: Import Markdown → Cloud Doc
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/import&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$TAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{&amp;#34;markdown&amp;#34;: &amp;#34;# Your Document\n\nContent here...&amp;#34;, &amp;#34;file_name&amp;#34;: &amp;#34;My Document&amp;#34;}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Known limitations&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mermaid code blocks are flattened to plain text paragraphs&lt;/li&gt;
+&lt;li&gt;Max file size: 20MB&lt;/li&gt;
+&lt;li&gt;Chinese text may need Unicode escaping (&lt;code&gt;\uXXXX&lt;/code&gt;) in some contexts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Output&lt;/strong&gt;: Returns a &lt;code&gt;doc_token&lt;/code&gt; for use in subsequent steps.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="step-2-transfer-ownership-to-user"&gt;Step 2: Transfer Ownership to User
+&lt;/h2&gt;&lt;p&gt;Import creates a doc owned by the app. Wiki move requires user ownership.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/drive/v1/permissions/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/members/transfer_owner?type=docx&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$TAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;member_type\&amp;#34;:\&amp;#34;openid\&amp;#34;,\&amp;#34;member_id\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$USER_OPEN_ID&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Notes&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Uses TAT (app transfers to user)&lt;/li&gt;
+&lt;li&gt;If user already owns it, returns error code &lt;code&gt;1063002&lt;/code&gt; — safe to ignore&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;⚠️ CRITICAL&lt;/strong&gt;: Wait 3 seconds after this before the next step!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sleep &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="c1"&gt;# DO NOT SKIP — wiki move fails without this delay&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="step-3-move-cloud-doc--wiki-node"&gt;Step 3: Move Cloud Doc → Wiki Node
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/wiki/v2/spaces/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;WIKI_SPACE_ID&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/nodes/move_docs_to_wiki&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;parent_wiki_token\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$PARENT_NODE&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;,\&amp;#34;obj_type\&amp;#34;:\&amp;#34;docx\&amp;#34;,\&amp;#34;obj_token\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$DOC_TOKEN&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Notes&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Uses &lt;strong&gt;UAT&lt;/strong&gt; — user must own the doc&lt;/li&gt;
+&lt;li&gt;Returns &lt;code&gt;wiki_token&lt;/code&gt; (different from &lt;code&gt;doc_token&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;If you lose the &lt;code&gt;wiki_token&lt;/code&gt;, retrieve it later:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X GET &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/wiki/v2/spaces/get_node?token=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;amp;obj_type=docx&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="step-4-fix-mermaid-blocks"&gt;Step 4: Fix Mermaid Blocks
+&lt;/h2&gt;&lt;p&gt;Mermaid code blocks are imported as plain text paragraphs (&lt;code&gt;block_type=2&lt;/code&gt;). You need to replace them with native mermaid diagram blocks (&lt;code&gt;block_type=40&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;⚠️ Process from bottom to top&lt;/strong&gt; to avoid index drift after deletion.&lt;/p&gt;
+&lt;h3 id="4a-find-flattened-mermaid-blocks"&gt;4a. Find flattened mermaid blocks
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -s -X GET &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/blocks?page_size=200&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; python3 -c &lt;span class="s2"&gt;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;import json, sys
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;data = json.load(sys.stdin)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;for item in data[&amp;#39;data&amp;#39;][&amp;#39;items&amp;#39;]:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; if item.get(&amp;#39;block_type&amp;#39;) != 2: continue
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; for el in item.get(&amp;#39;text&amp;#39;, {}).get(&amp;#39;elements&amp;#39;, []):
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; content = el.get(&amp;#39;text_run&amp;#39;, {}).get(&amp;#39;content&amp;#39;, &amp;#39;&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; if any(kw in content for kw in [&amp;#39;graph TD&amp;#39;, &amp;#39;graph LR&amp;#39;, &amp;#39;flowchart&amp;#39;, &amp;#39;sequenceDiagram&amp;#39;]):
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; print(f&amp;#39;FOUND: {item[\&amp;#34;block_id\&amp;#34;]} | {content[:100]}&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Detection heuristic: paragraphs (&lt;code&gt;type=2&lt;/code&gt;) containing arrow patterns (&lt;code&gt;--&amp;gt;&lt;/code&gt;) plus mermaid keywords (&lt;code&gt;graph&lt;/code&gt;, &lt;code&gt;flowchart&lt;/code&gt;, &lt;code&gt;subgraph&lt;/code&gt;).&lt;/p&gt;
+&lt;h3 id="4b-get-block-index"&gt;4b. Get block index
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -s -X GET &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/blocks/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; python3 -c &lt;span class="s2"&gt;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;import json, sys
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;data = json.load(sys.stdin)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;children = data[&amp;#39;data&amp;#39;][&amp;#39;block&amp;#39;][&amp;#39;children&amp;#39;]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;target = &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;BLOCK_ID&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;for i, c in enumerate(children):
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; if c == target:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; print(f&amp;#39;Index: {i}&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="4c-create-mermaid-diagram-block"&gt;4c. Create mermaid diagram block
+&lt;/h3&gt;&lt;p&gt;The key structure for a Mermaid block:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;block_type&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;add_ons&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;component_type_id&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;blk_631fefbbae02400430b8f9f4&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;data\&amp;#34;:\&amp;#34;graph TD\\n A --&amp;gt; B\&amp;#34;,\&amp;#34;theme\&amp;#34;:\&amp;#34;default\&amp;#34;,\&amp;#34;view\&amp;#34;:\&amp;#34;chart\&amp;#34;}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;component_type_id&lt;/code&gt; is fixed: &lt;code&gt;blk_631fefbbae02400430b8f9f4&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;record&lt;/code&gt; is a &lt;strong&gt;JSON string&lt;/strong&gt; (double-encoded in request body)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;record.data&lt;/code&gt;: raw mermaid code, &lt;code&gt;\n&lt;/code&gt; for newlines&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;record.view&lt;/code&gt;: &lt;code&gt;&amp;quot;chart&amp;quot;&lt;/code&gt; renders the diagram&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;RECORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;python3 -c &lt;span class="s2"&gt;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;import json
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;data = {&amp;#39;data&amp;#39;: &amp;#39;&amp;#39;&amp;#39;graph LR
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; A --&amp;gt; B --&amp;gt; C&amp;#39;&amp;#39;&amp;#39;, &amp;#39;theme&amp;#39;: &amp;#39;default&amp;#39;, &amp;#39;view&amp;#39;: &amp;#39;chart&amp;#39;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;print(json.dumps(json.dumps(data, ensure_ascii=False)))
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -s -X POST &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/blocks/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/children&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;children\&amp;#34;: [{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;block_type\&amp;#34;: 40,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;add_ons\&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;component_type_id\&amp;#34;: \&amp;#34;blk_631fefbbae02400430b8f9f4\&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;record\&amp;#34;: &lt;/span&gt;&lt;span class="nv"&gt;$RECORD&lt;/span&gt;&lt;span class="s2"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; }],
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;index\&amp;#34;: &lt;/span&gt;&lt;span class="k"&gt;$((&lt;/span&gt;BLOCK_INDEX &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;))&lt;/span&gt;&lt;span class="s2"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; }&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="4d-delete-old-flattened-text-block"&gt;4d. Delete old flattened text block
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -s -X DELETE &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/blocks/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/children/batch_delete&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;start_index\&amp;#34;: &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;BLOCK_INDEX&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;, \&amp;#34;end_index\&amp;#34;: &lt;/span&gt;&lt;span class="k"&gt;$((&lt;/span&gt;BLOCK_INDEX &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;))&lt;/span&gt;&lt;span class="s2"&gt;}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="record-encoding-helper"&gt;Record encoding helper
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;mermaid_code&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&amp;#34;&amp;#34;graph TD
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; A[Start] --&amp;gt; B[Process]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; B --&amp;gt; C&lt;/span&gt;&lt;span class="si"&gt;{Decision}&lt;/span&gt;&lt;span class="s2"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; C --&amp;gt;|Yes| D[End]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; C --&amp;gt;|No| B&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;data&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mermaid_code&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;theme&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;default&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;view&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;chart&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="n"&gt;ensure_ascii&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# For curl request body, double-encode:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;request_record&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="block-type-reference"&gt;Block Type Reference
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Notes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Page (root)&lt;/td&gt;
+&lt;td&gt;Document root&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;Text/Paragraph&lt;/td&gt;
+&lt;td&gt;Where mermaid gets flattened to&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3-8&lt;/td&gt;
+&lt;td&gt;Heading 1-6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;Bullet List&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;Ordered List&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;Code Block&lt;/td&gt;
+&lt;td&gt;Syntax highlighting only — &lt;strong&gt;does NOT render mermaid&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;Quote&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;Callout&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;31&lt;/td&gt;
+&lt;td&gt;Table&lt;/td&gt;
+&lt;td&gt;Has type-32 table_cell children&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;40&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Add-ons&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Mermaid diagrams live here&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="api-endpoints-summary"&gt;API Endpoints Summary
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Step&lt;/th&gt;
+&lt;th&gt;Method&lt;/th&gt;
+&lt;th&gt;Endpoint&lt;/th&gt;
+&lt;th&gt;Auth&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Import&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/import&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;TAT or UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Transfer&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/drive/v1/permissions/{token}/members/transfer_owner?type=docx&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;TAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Move to Wiki&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/wiki/v2/spaces/{space_id}/nodes/move_docs_to_wiki&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;List blocks&lt;/td&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/{doc_id}/blocks&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Get block&lt;/td&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/{doc_id}/blocks/{block_id}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Create block&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/{doc_id}/blocks/{parent_id}/children&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Delete blocks&lt;/td&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/{doc_id}/blocks/{parent_id}/children/batch_delete&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Get wiki node&lt;/td&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/wiki/v2/spaces/get_node?token={token}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="gotchas--lessons-learned"&gt;Gotchas &amp;amp; Lessons Learned
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Solution&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Wiki move fails after ownership transfer&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Sleep 3 seconds&lt;/strong&gt; between transfer and move&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Mermaid flattened to plain text&lt;/td&gt;
+&lt;td&gt;Post-process with block API (type 40)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Code block (type 14) doesn&amp;rsquo;t render mermaid&lt;/td&gt;
+&lt;td&gt;Must use type 40 add_ons&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PATCH cannot change block_type&lt;/td&gt;
+&lt;td&gt;Create new block + delete old block&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Block indices shift after delete&lt;/td&gt;
+&lt;td&gt;Process bottom to top&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;record&lt;/code&gt; field encoding&lt;/td&gt;
+&lt;td&gt;Double-encode: &lt;code&gt;json.dumps(json.dumps(data))&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Lost wiki_token&lt;/td&gt;
+&lt;td&gt;Retrieve via &lt;code&gt;get_node?token={doc_token}&amp;amp;obj_type=docx&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TAT can&amp;rsquo;t move docs to wiki&lt;/td&gt;
+&lt;td&gt;Transfer ownership first, then use UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Chinese in API payloads&lt;/td&gt;
+&lt;td&gt;Some endpoints need &lt;code&gt;\uXXXX&lt;/code&gt; escaping&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Wiki node deletion&lt;/td&gt;
+&lt;td&gt;Not supported via API — manual only&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</description></item></channel></rss>

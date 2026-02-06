@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Portfolio on 明鉴的博客</title><link>https://blog.mjshao.fun/zh-cn/tags/portfolio/</link><description>Recent content in Portfolio on 明鉴的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 29 Jan 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://blog.mjshao.fun/zh-cn/tags/portfolio/index.xml" rel="self" type="application/rss+xml"/><item><title>新主页：Magic Portfolio</title><link>https://blog.mjshao.fun/zh-cn/p/new-homepage-magic-portfolio/</link><pubDate>Thu, 29 Jan 2026 10:00:00 +0800</pubDate><guid>https://blog.mjshao.fun/zh-cn/p/new-homepage-magic-portfolio/</guid><description>&lt;img src="https://blog.mjshao.fun/p/new-homepage-magic-portfolio/cover.jpg" alt="Featured image of post 新主页：Magic Portfolio" /&gt;&lt;p&gt;&lt;img src="https://blog.mjshao.fun/p/new-homepage-magic-portfolio/cover.jpg"
+width="1400"
+height="900"
+srcset="https://blog.mjshao.fun/p/new-homepage-magic-portfolio/cover_hu_a179afc13e53f518.jpg 480w, https://blog.mjshao.fun/p/new-homepage-magic-portfolio/cover_hu_8721f5d6cab58091.jpg 1024w"
+loading="lazy"
+alt="New Homepage"
+class="gallery-image"
+data-flex-grow="155"
+data-flex-basis="373px"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;把主站迁移到 Vercel 上的 Next.js 作品集。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="换站"&gt;换站
+&lt;/h2&gt;&lt;p&gt;我把主页（&lt;code&gt;mjshao.fun&lt;/code&gt;）从静态 HTML 页面换成了 &lt;a class="link" href="https://github.com/once-ui-system/magic-portfolio" target="_blank" rel="noopener"
+&gt;Magic Portfolio&lt;/a&gt;，一个基于 Once UI 的现代 Next.js 模板。&lt;/p&gt;
+&lt;h3 id="为什么"&gt;为什么？
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;设计更好&lt;/strong&gt;：开箱即用的简洁、美观、响应式设计。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MDX 支持&lt;/strong&gt;：方便添加内容和项目展示。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;技术栈&lt;/strong&gt;：Next.js 14 + React 19 + TypeScript。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="404-问题"&gt;404 问题
+&lt;/h2&gt;&lt;p&gt;你可能注意到 &lt;code&gt;mjshao.fun/siliconlm&lt;/code&gt; 现在打不开了。&lt;/p&gt;
+&lt;p&gt;这是因为 &lt;code&gt;mjshao.fun&lt;/code&gt; 现在指向了 Vercel（Next.js 应用），它不知道我旧的 GitHub Pages 项目。&lt;/p&gt;
+&lt;h3 id="解决方案"&gt;解决方案
+&lt;/h3&gt;&lt;p&gt;我已经把 &lt;strong&gt;SiliconLM&lt;/strong&gt; 文档迁移到了这个博客：&lt;/p&gt;
+&lt;p&gt;👉 &lt;a class="link" href="https://blog.mjshao.fun/p/siliconlm/" &gt;SiliconLM 项目页&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;其他项目链接会逐步迁移。&lt;/p&gt;
+&lt;h2 id="技术栈"&gt;技术栈
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;组件&lt;/th&gt;
+&lt;th&gt;技术&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;框架&lt;/td&gt;
+&lt;td&gt;Next.js 14 (App Router)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;UI 库&lt;/td&gt;
+&lt;td&gt;Once UI&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;样式&lt;/td&gt;
+&lt;td&gt;SCSS + CSS Modules&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;部署&lt;/td&gt;
+&lt;td&gt;Vercel&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;看看新主页：&lt;a class="link" href="https://mjshao.fun" target="_blank" rel="noopener"
+&gt;mjshao.fun&lt;/a&gt;。&lt;/p&gt;</description></item></channel></rss>

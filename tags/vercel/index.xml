@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vercel on Mingjian</title><link>https://blog.mjshao.fun/tags/vercel/</link><description>Recent content in Vercel on Mingjian</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 29 Jan 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://blog.mjshao.fun/tags/vercel/index.xml" rel="self" type="application/rss+xml"/><item><title>New Homepage with Magic Portfolio</title><link>https://blog.mjshao.fun/p/new-homepage-magic-portfolio/</link><pubDate>Thu, 29 Jan 2026 10:00:00 +0800</pubDate><guid>https://blog.mjshao.fun/p/new-homepage-magic-portfolio/</guid><description>&lt;img src="https://blog.mjshao.fun/p/new-homepage-magic-portfolio/cover.jpg" alt="Featured image of post New Homepage with Magic Portfolio" /&gt;&lt;p&gt;&lt;img src="https://blog.mjshao.fun/p/new-homepage-magic-portfolio/cover.jpg"
+width="1400"
+height="900"
+srcset="https://blog.mjshao.fun/p/new-homepage-magic-portfolio/cover_hu_a179afc13e53f518.jpg 480w, https://blog.mjshao.fun/p/new-homepage-magic-portfolio/cover_hu_8721f5d6cab58091.jpg 1024w"
+loading="lazy"
+alt="New Homepage"
+class="gallery-image"
+data-flex-grow="155"
+data-flex-basis="373px"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Migrating my main site to a Next.js portfolio hosted on Vercel.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="the-switch"&gt;The Switch
+&lt;/h2&gt;&lt;p&gt;I&amp;rsquo;ve moved my homepage (&lt;code&gt;mjshao.fun&lt;/code&gt;) from a static HTML page to &lt;a class="link" href="https://github.com/once-ui-system/magic-portfolio" target="_blank" rel="noopener"
+&gt;Magic Portfolio&lt;/a&gt;, a modern Next.js template built with Once UI.&lt;/p&gt;
+&lt;h3 id="why"&gt;Why?
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Better Design&lt;/strong&gt;: Clean, minimal, and responsive out of the box.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MDX Support&lt;/strong&gt;: Easy to add content and projects.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tech Stack&lt;/strong&gt;: Next.js 14 + React 19 + TypeScript.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="the-404-issue"&gt;The 404 Issue
+&lt;/h2&gt;&lt;p&gt;You might have noticed that &lt;code&gt;mjshao.fun/siliconlm&lt;/code&gt; is currently broken.&lt;/p&gt;
+&lt;p&gt;This is because &lt;code&gt;mjshao.fun&lt;/code&gt; now points to Vercel (Next.js app), which doesn&amp;rsquo;t know about my old GitHub Pages projects.&lt;/p&gt;
+&lt;h3 id="solution"&gt;Solution
+&lt;/h3&gt;&lt;p&gt;I&amp;rsquo;ve migrated the &lt;strong&gt;SiliconLM&lt;/strong&gt; documentation to this blog:&lt;/p&gt;
+&lt;p&gt;👉 &lt;a class="link" href="https://blog.mjshao.fun/p/siliconlm/" &gt;SiliconLM Project Page&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll be migrating other project links gradually.&lt;/p&gt;
+&lt;h2 id="tech-stack"&gt;Tech Stack
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Component&lt;/th&gt;
+&lt;th&gt;Technology&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Framework&lt;/td&gt;
+&lt;td&gt;Next.js 14 (App Router)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;UI Library&lt;/td&gt;
+&lt;td&gt;Once UI&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Styling&lt;/td&gt;
+&lt;td&gt;SCSS + CSS Modules&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Deployment&lt;/td&gt;
+&lt;td&gt;Vercel&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Check out the new homepage at &lt;a class="link" href="https://mjshao.fun" target="_blank" rel="noopener"
+&gt;mjshao.fun&lt;/a&gt;.&lt;/p&gt;</description></item></channel></rss>

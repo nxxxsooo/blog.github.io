@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on Mingjian</title><link>https://blog.mjshao.fun/tags/python/</link><description>Recent content in Python on Mingjian</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 26 Jan 2026 16:13:22 +0800</lastBuildDate><atom:link href="https://blog.mjshao.fun/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>MDX 转 Apple Dictionary 完整指南</title><link>https://blog.mjshao.fun/p/mdx-to-apple-dictionary/</link><pubDate>Mon, 26 Jan 2026 16:13:22 +0800</pubDate><guid>https://blog.mjshao.fun/p/mdx-to-apple-dictionary/</guid><description>&lt;img src="https://blog.mjshao.fun/p/mdx-to-apple-dictionary/cover.jpg" alt="Featured image of post MDX 转 Apple Dictionary 完整指南" /&gt;&lt;p&gt;将 MDict (.mdx/.mdd) 词典转换为 macOS Apple Dictionary 格式。&lt;/p&gt;
+&lt;h2 id="推荐工具"&gt;推荐工具
+&lt;/h2&gt;&lt;p&gt;我写了一个自动化脚本 &lt;a class="link" href="https://github.com/nxxxsooo/mdx2apple" target="_blank" rel="noopener"
+&gt;mdx2apple&lt;/a&gt;，可以一键完成整个转换流程：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/nxxxsooo/mdx2apple.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; mdx2apple
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip install pyglossary lxml beautifulsoup4 html5lib
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 一键转换并安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;python mdx2apple.py /path/to/dictionary.mdx --install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果你想了解手动转换的原理，继续往下看。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="手动转换指南"&gt;手动转换指南
+&lt;/h2&gt;&lt;h3 id="工具准备"&gt;工具准备
+&lt;/h3&gt;&lt;h3 id="1-安装-pyglossary"&gt;1. 安装 pyglossary
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip3 install --user pyglossary lxml beautifulsoup4 html5lib
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="2-安装-dictionary-development-kit-ddk"&gt;2. 安装 Dictionary Development Kit (DDK)
+&lt;/h3&gt;&lt;p&gt;从 GitHub 镜像安装（无需 Apple Developer 账号）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/ikey4u/macddk.git ~/Library/Developer/Dictionary-Development-Kit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="转换步骤"&gt;转换步骤
+&lt;/h2&gt;&lt;h3 id="step-1-mdx-转-appledict-源文件"&gt;Step 1: MDX 转 AppleDict 源文件
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pyglossary input.mdx output.apple --write-format&lt;span class="o"&gt;=&lt;/span&gt;AppleDict
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;生成的文件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;output.apple/&lt;/code&gt; 目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*.xml&lt;/code&gt; - 词典内容&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*.css&lt;/code&gt; - 样式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*.plist&lt;/code&gt; - 元数据&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Makefile&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OtherResources/&lt;/code&gt; - 音频、图片等资源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="step-2-关键修复"&gt;Step 2: 关键修复
+&lt;/h3&gt;&lt;h4 id="问题1css-缺少-displayblock"&gt;问题1：CSS 缺少 display:block
+&lt;/h4&gt;&lt;p&gt;原始 CSS 中 &lt;code&gt;d|entry {}&lt;/code&gt; 为空，导致内容不显示。&lt;/p&gt;
+&lt;p&gt;修复：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;d&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nt"&gt;entry&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="问题2html-结构过于复杂"&gt;问题2：HTML 结构过于复杂
+&lt;/h4&gt;&lt;p&gt;MDict HTML 包含大量自定义属性和复杂嵌套，Apple Dictionary 无法正确渲染。&lt;/p&gt;
+&lt;p&gt;解决方案：用 Python 清理 XML，保留核心内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;span class="lnt"&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;bs4&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;BeautifulSoup&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;clean_entry&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;entry&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 保留 d:entry 标签和 d:index 索引&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 提取：headword, pos, pronunciation, definitions, examples&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 移除：自定义属性(hclass, htag, idm_id等)、javascript、复杂嵌套&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 转义特殊字符：&amp;amp; &amp;lt; &amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="问题3plist-过于复杂"&gt;问题3：plist 过于复杂
+&lt;/h4&gt;&lt;p&gt;pyglossary 生成的 plist 可能有问题。使用简化版：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-xml" data-lang="xml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;&amp;lt;!DOCTYPE plist PUBLIC &amp;#34;-//Apple//DTD PLIST 1.0//EN&amp;#34; &amp;#34;...&amp;#34;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;plist&lt;/span&gt; &lt;span class="na"&gt;version=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;1.0&amp;#34;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;dict&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;CFBundleDevelopmentRegion&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;English&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;CFBundleIdentifier&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;com.example.dict&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;CFBundleDisplayName&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;My Dictionary&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;CFBundleName&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;MyDict&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;CFBundleShortVersionString&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;1.0&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;DCSDictionaryCopyright&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;Copyright&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;DCSDictionaryManufacturerName&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;Publisher&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;/dict&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;/plist&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="step-3-编译"&gt;Step 3: 编译
+&lt;/h3&gt;&lt;p&gt;修改 Makefile 中的 DDK 路径：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-makefile" data-lang="makefile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;DICT_BUILD_TOOL_DIR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;HOME&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;/Library/Developer/Dictionary-Development-Kit&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;DICT_BUILD_OPTS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; -v 10.11
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;资源文件太多会导致编译失败，需要先移走：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mv OtherResources /tmp/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;make
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mv /tmp/OtherResources ./
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="step-4-安装"&gt;Step 4: 安装
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 复制词典&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cp -R objects/MyDict.dictionary ~/Library/Dictionaries/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 添加资源（音频、图片）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;rsync -a OtherResources/ ~/Library/Dictionaries/MyDict.dictionary/Contents/Resources/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 清除缓存&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;rm -rf ~/Library/Caches/com.apple.Dictionary
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;killall Dictionary
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;killall DictionaryWorkerService
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="限制"&gt;限制
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;无音频播放&lt;/strong&gt;：Apple Dictionary 不支持 JavaScript 音频，MDict 的发音功能无法使用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;复杂排版丢失&lt;/strong&gt;：原始词典的复杂 CSS 样式大部分无法保留&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;大词典可能有问题&lt;/strong&gt;：6万+ 词条需要简化 HTML 结构才能正常显示&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="调试技巧"&gt;调试技巧
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;先测试小词典&lt;/strong&gt;：创建 100 条目的测试词典验证流程&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;检查 Body.data&lt;/strong&gt;：如果为空或很小，说明内容未正确编译&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;查看 Console.app&lt;/strong&gt;：搜索 &amp;ldquo;Dictionary&amp;rdquo; 相关日志&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;简化 plist&lt;/strong&gt;：复杂的 plist 设置可能导致问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="文件位置"&gt;文件位置
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;词典安装位置：&lt;code&gt;~/Library/Dictionaries/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;缓存位置：&lt;code&gt;~/Library/Caches/com.apple.Dictionary/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;DDK 位置：&lt;code&gt;~/Library/Developer/Dictionary-Development-Kit/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/ilius/pyglossary" target="_blank" rel="noopener"
+&gt;pyglossary&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/ikey4u/macddk" target="_blank" rel="noopener"
+&gt;DDK 镜像&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Apple Dictionary 格式文档: Apple Developer Documentation&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>SiliconLM</title><link>https://blog.mjshao.fun/p/siliconlm/</link><pubDate>Sun, 25 Jan 2026 02:05:13 +0800</pubDate><guid>https://blog.mjshao.fun/p/siliconlm/</guid><description>&lt;img src="https://blog.mjshao.fun/p/siliconlm/cover.png" alt="Featured image of post SiliconLM" /&gt;&lt;p&gt;&lt;img src="https://blog.mjshao.fun/p/siliconlm/cover.png"
+width="2384"
+height="1388"
+srcset="https://blog.mjshao.fun/p/siliconlm/cover_hu_885c3b1970a763a3.png 480w, https://blog.mjshao.fun/p/siliconlm/cover_hu_df57f7208a80cffc.png 1024w"
+loading="lazy"
+alt="SiliconLM Dashboard"
+class="gallery-image"
+data-flex-grow="171"
+data-flex-basis="412px"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Local LLM dashboard for Apple Silicon Macs. Manage models, services, embeddings, and downloads.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class="link" href="https://mjshao.fun/siliconlm/" target="_blank" rel="noopener"
+&gt;Project Website&lt;/a&gt; | &lt;a class="link" href="https://github.com/nxxxsooo/siliconlm" target="_blank" rel="noopener"
+&gt;GitHub Repository&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="features"&gt;Features
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Machine Info&lt;/strong&gt; - Chip, GPU cores, Neural Engine, RAM, disk at a glance&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MLX Embeddings Server&lt;/strong&gt; - OpenAI-compatible &lt;code&gt;/v1/embeddings&lt;/code&gt; API on port 8766&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-Backend Support&lt;/strong&gt; - MLX, mlx-lm (decoder models), sentence-transformers&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Service Management&lt;/strong&gt; - Start/stop LMStudio, MLX Embeddings, OpenCode&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Smart Proxy&lt;/strong&gt; - Routes &lt;code&gt;/v1/embeddings&lt;/code&gt; to MLX, &lt;code&gt;/v1/chat&lt;/code&gt; to LMStudio&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Model Downloads&lt;/strong&gt; - HuggingFace search + aria2 acceleration for large files&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Settings Panel&lt;/strong&gt; - Configure models directory, default embedding model&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="architecture"&gt;Architecture
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;CherryStudio / Client
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;http://localhost:8765/v1/* (SiliconLM Proxy)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ┌────┴────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼ ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/v1/embeddings /v1/chat/*
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼ ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;:8766 (MLX) :1234 (LMStudio)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ├─► MLX (bert, roberta)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ├─► mlx-lm (Qwen3, gte-Qwen2)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └─► sentence-transformers (bge-m3)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="supported-embedding-models"&gt;Supported Embedding Models
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Model&lt;/th&gt;
+&lt;th&gt;Backend&lt;/th&gt;
+&lt;th&gt;Dimensions&lt;/th&gt;
+&lt;th&gt;Speed&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;mixedbread-ai/mxbai-embed-large-v1&lt;/td&gt;
+&lt;td&gt;MLX&lt;/td&gt;
+&lt;td&gt;1024&lt;/td&gt;
+&lt;td&gt;Fast&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;BAAI/bge-m3&lt;/td&gt;
+&lt;td&gt;sentence-transformers&lt;/td&gt;
+&lt;td&gt;1024&lt;/td&gt;
+&lt;td&gt;Medium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mlx-community/Qwen3-Embedding-0.6B-4bit&lt;/td&gt;
+&lt;td&gt;mlx-lm&lt;/td&gt;
+&lt;td&gt;1024&lt;/td&gt;
+&lt;td&gt;Fast&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mlx-community/Qwen3-Embedding-8B-4bit&lt;/td&gt;
+&lt;td&gt;mlx-lm&lt;/td&gt;
+&lt;td&gt;4096&lt;/td&gt;
+&lt;td&gt;Medium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mlx-community/gte-Qwen2-7B-instruct-4bit&lt;/td&gt;
+&lt;td&gt;mlx-lm&lt;/td&gt;
+&lt;td&gt;3584&lt;/td&gt;
+&lt;td&gt;Medium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="tech-stack"&gt;Tech Stack
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Component&lt;/th&gt;
+&lt;th&gt;Technology&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Backend&lt;/td&gt;
+&lt;td&gt;FastAPI + uvicorn&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Frontend&lt;/td&gt;
+&lt;td&gt;TailwindCSS + Vanilla JS&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Embeddings&lt;/td&gt;
+&lt;td&gt;MLX + mlx-lm + sentence-transformers&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Downloads&lt;/td&gt;
+&lt;td&gt;huggingface_hub + aria2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proxy&lt;/td&gt;
+&lt;td&gt;httpx async&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="license"&gt;License
+&lt;/h2&gt;&lt;p&gt;MIT&lt;/p&gt;</description></item></channel></rss>

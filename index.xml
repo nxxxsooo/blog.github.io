@@ -1,0 +1,2020 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mingjian</title><link>https://blog.mjshao.fun/</link><description>Recent content on Mingjian</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 06 Feb 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://blog.mjshao.fun/index.xml" rel="self" type="application/rss+xml"/><item><title>Why I Cap My Batteries at 80%</title><link>https://blog.mjshao.fun/p/battery-charging-strategy/</link><pubDate>Fri, 06 Feb 2026 00:00:00 +0800</pubDate><guid>https://blog.mjshao.fun/p/battery-charging-strategy/</guid><description>&lt;img src="https://blog.mjshao.fun/p/battery-charging-strategy/cover.png" alt="Featured image of post Why I Cap My Batteries at 80%" /&gt;&lt;blockquote&gt;
+&lt;p&gt;Your battery degrades fastest when it&amp;rsquo;s full — not when it&amp;rsquo;s used.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="my-setup"&gt;My Setup
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Device&lt;/th&gt;
+&lt;th&gt;Charge Limit&lt;/th&gt;
+&lt;th&gt;Daily Pattern&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;MacBook Pro M3 Max&lt;/td&gt;
+&lt;td&gt;80%&lt;/td&gt;
+&lt;td&gt;Plugged in most of the time, occasionally unplugged to move around&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;iPhone Air&lt;/td&gt;
+&lt;td&gt;80%&lt;/td&gt;
+&lt;td&gt;Shallow 70–80% cycles, wireless charging at the office + cable at home + power bank on the go&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Both devices almost always have access to power. That&amp;rsquo;s the key prerequisite — this strategy doesn&amp;rsquo;t work if you regularly need a full charge to get through the day.&lt;/p&gt;
+&lt;h2 id="two-ways-batteries-die"&gt;Two Ways Batteries Die
+&lt;/h2&gt;&lt;h3 id="1-cycle-aging-from-use"&gt;1. Cycle Aging (from use)
+&lt;/h3&gt;&lt;p&gt;Every charge-discharge cycle forces lithium ions between electrodes, causing the electrode material to expand and contract. Over time this leads to cracking and capacity loss.&lt;/p&gt;
+&lt;p&gt;Shallow cycles (70→80%) cause dramatically less stress than deep cycles (0→100%).&lt;/p&gt;
+&lt;h3 id="2-calendar-aging-just-from-existing"&gt;2. Calendar Aging (just from existing)
+&lt;/h3&gt;&lt;p&gt;Even sitting idle, a lithium battery degrades. The electrolyte slowly decomposes at high voltage, thickening the SEI layer and increasing internal resistance. The cathode structure becomes unstable, leaching metal ions.&lt;/p&gt;
+&lt;p&gt;Two factors control the speed: &lt;strong&gt;temperature&lt;/strong&gt; and &lt;strong&gt;state of charge (voltage)&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id="voltage-is-everything"&gt;Voltage Is Everything
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Charge&lt;/th&gt;
+&lt;th&gt;Voltage&lt;/th&gt;
+&lt;th&gt;Capacity After 1 Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;100%&lt;/td&gt;
+&lt;td&gt;~4.2V&lt;/td&gt;
+&lt;td&gt;~92–94%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;80%&lt;/td&gt;
+&lt;td&gt;~3.9V&lt;/td&gt;
+&lt;td&gt;~96–98%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;50%&lt;/td&gt;
+&lt;td&gt;~3.6V&lt;/td&gt;
+&lt;td&gt;~98–99%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;A mere 0.3V difference between 100% and 80% has a massive impact on chemical degradation rate.&lt;/p&gt;
+&lt;h2 id="why-always-plugged-in-at-100-is-the-worst"&gt;Why &amp;ldquo;Always Plugged In at 100%&amp;rdquo; Is the Worst
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s what happens when your device sits on a charger at full:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Charges to 100% (4.2V)&lt;/li&gt;
+&lt;li&gt;Charger stops → battery naturally drops to 99%&lt;/li&gt;
+&lt;li&gt;Charger detects the drop → immediately tops back up&lt;/li&gt;
+&lt;li&gt;Repeat forever&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The result: your battery sits at maximum voltage 24/7, maximizing calendar aging, plus accumulating countless 99→100% micro-cycles on top.&lt;/p&gt;
+&lt;h2 id="what-80-actually-solves"&gt;What 80% Actually Solves
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Battery stabilizes around &lt;strong&gt;3.9V&lt;/strong&gt; — the chemical degradation sweet spot&lt;/li&gt;
+&lt;li&gt;The 70–80% voltage range (3.8–3.9V) is where lithium-ion cells experience &lt;strong&gt;minimum stress&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Shallow cycling at ~10% depth of discharge causes &lt;strong&gt;near-zero electrode damage&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="but-i-unplug-my-mac-sometimes"&gt;&amp;ldquo;But I Unplug My Mac Sometimes&amp;rdquo;
+&lt;/h2&gt;&lt;p&gt;A common worry: &lt;em&gt;&amp;ldquo;With an 80% limit, every time I unplug to move rooms I&amp;rsquo;m using battery cycles.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This doesn&amp;rsquo;t matter:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &amp;ldquo;cycle&amp;rdquo; = cumulative discharge equal to full capacity&lt;/li&gt;
+&lt;li&gt;Losing 1–2% per unplug means you need &lt;strong&gt;50–100 unplugs&lt;/strong&gt; to complete one cycle&lt;/li&gt;
+&lt;li&gt;The calendar aging you &lt;strong&gt;prevent&lt;/strong&gt; by staying at 3.9V instead of 4.2V far outweighs these trivial shallow cycles&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="when-not-to-use-80"&gt;When NOT to Use 80%
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;❌ You&amp;rsquo;re regularly away from power all day → consider 85–90%&lt;/li&gt;
+&lt;li&gt;❌ You&amp;rsquo;re traveling and need maximum runtime → temporarily disable the limit&lt;/li&gt;
+&lt;li&gt;✅ You&amp;rsquo;re mostly at a desk with power → &lt;strong&gt;perfect scenario&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;✅ You carry a power bank → battery anxiety eliminated&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="long-term-storage"&gt;Long-Term Storage
+&lt;/h2&gt;&lt;p&gt;If you&amp;rsquo;re shelving a device for weeks or months, charge to &lt;strong&gt;50%&lt;/strong&gt; and power off. That&amp;rsquo;s the most chemically stable state for lithium-ion.&lt;/p&gt;
+&lt;h2 id="requirements"&gt;Requirements
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;macOS Sequoia+ or iOS 18+ (native charge limit settings)&lt;/li&gt;
+&lt;li&gt;Device usually near a power source&lt;/li&gt;
+&lt;li&gt;A power bank or multiple chargers for peace of mind&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Feishu: Markdown → Wiki Pipeline</title><link>https://blog.mjshao.fun/p/feishu-markdown-wiki/</link><pubDate>Tue, 03 Feb 2026 00:00:00 +0800</pubDate><guid>https://blog.mjshao.fun/p/feishu-markdown-wiki/</guid><description>&lt;img src="https://blog.mjshao.fun/p/feishu-markdown-wiki/cover.png" alt="Featured image of post Feishu: Markdown → Wiki Pipeline" /&gt;&lt;blockquote&gt;
+&lt;p&gt;End-to-end workflow for uploading local markdown to Feishu Wiki with mermaid diagram support.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="overview"&gt;Overview
+&lt;/h2&gt;&lt;p&gt;Feishu has &lt;strong&gt;no direct &amp;ldquo;upload to wiki&amp;rdquo; API&lt;/strong&gt;. You must go through cloud docs first, following a 4-step pipeline:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Step&lt;/th&gt;
+&lt;th&gt;Action&lt;/th&gt;
+&lt;th&gt;Auth&lt;/th&gt;
+&lt;th&gt;Notes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Import Markdown → Cloud Doc&lt;/td&gt;
+&lt;td&gt;TAT or UAT&lt;/td&gt;
+&lt;td&gt;Creates doc owned by app&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;Transfer ownership to user&lt;/td&gt;
+&lt;td&gt;TAT&lt;/td&gt;
+&lt;td&gt;Required for wiki move&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;Move Cloud Doc → Wiki Node&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Sleep 3s after step 2!&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;Fix Mermaid blocks&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;td&gt;Replace type 2 → type 40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="prerequisites"&gt;Prerequisites
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Feishu App with &lt;code&gt;wiki&lt;/code&gt;, &lt;code&gt;docx&lt;/code&gt;, &lt;code&gt;drive&lt;/code&gt; scopes&lt;/li&gt;
+&lt;li&gt;UAT (User Access Token) — refreshed via OAuth flow&lt;/li&gt;
+&lt;li&gt;TAT (Tenant Access Token) — obtained via app credentials&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Config&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;APP_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;cli_xxxxxxxxxxxxx&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;APP_SECRET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;your_app_secret&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;WIKI_SPACE_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;your_wiki_space_id&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;PARENT_NODE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;your_parent_node_token&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;USER_OPEN_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;your_user_open_id&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Get TAT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;TAT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;curl -s -X POST &lt;span class="s1"&gt;&amp;#39;https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s1"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;app_id\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$APP_ID&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;,\&amp;#34;app_secret\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$APP_SECRET&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;}&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; python3 -c &lt;span class="s2"&gt;&amp;#34;import json,sys; print(json.load(sys.stdin)[&amp;#39;tenant_access_token&amp;#39;])&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Get UAT from cached token&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;UAT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;python3 -c &lt;span class="s2"&gt;&amp;#34;import json; print(json.load(open(&amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/.feishu_token_cache.json&amp;#39;))[&amp;#39;access_token&amp;#39;])&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="step-1-import-markdown--cloud-doc"&gt;Step 1: Import Markdown → Cloud Doc
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/import&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$TAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{&amp;#34;markdown&amp;#34;: &amp;#34;# Your Document\n\nContent here...&amp;#34;, &amp;#34;file_name&amp;#34;: &amp;#34;My Document&amp;#34;}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Known limitations&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mermaid code blocks are flattened to plain text paragraphs&lt;/li&gt;
+&lt;li&gt;Max file size: 20MB&lt;/li&gt;
+&lt;li&gt;Chinese text may need Unicode escaping (&lt;code&gt;\uXXXX&lt;/code&gt;) in some contexts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Output&lt;/strong&gt;: Returns a &lt;code&gt;doc_token&lt;/code&gt; for use in subsequent steps.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="step-2-transfer-ownership-to-user"&gt;Step 2: Transfer Ownership to User
+&lt;/h2&gt;&lt;p&gt;Import creates a doc owned by the app. Wiki move requires user ownership.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/drive/v1/permissions/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/members/transfer_owner?type=docx&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$TAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;member_type\&amp;#34;:\&amp;#34;openid\&amp;#34;,\&amp;#34;member_id\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$USER_OPEN_ID&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Notes&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Uses TAT (app transfers to user)&lt;/li&gt;
+&lt;li&gt;If user already owns it, returns error code &lt;code&gt;1063002&lt;/code&gt; — safe to ignore&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;⚠️ CRITICAL&lt;/strong&gt;: Wait 3 seconds after this before the next step!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sleep &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="c1"&gt;# DO NOT SKIP — wiki move fails without this delay&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="step-3-move-cloud-doc--wiki-node"&gt;Step 3: Move Cloud Doc → Wiki Node
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/wiki/v2/spaces/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;WIKI_SPACE_ID&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/nodes/move_docs_to_wiki&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;parent_wiki_token\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$PARENT_NODE&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;,\&amp;#34;obj_type\&amp;#34;:\&amp;#34;docx\&amp;#34;,\&amp;#34;obj_token\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$DOC_TOKEN&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Notes&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Uses &lt;strong&gt;UAT&lt;/strong&gt; — user must own the doc&lt;/li&gt;
+&lt;li&gt;Returns &lt;code&gt;wiki_token&lt;/code&gt; (different from &lt;code&gt;doc_token&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;If you lose the &lt;code&gt;wiki_token&lt;/code&gt;, retrieve it later:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X GET &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/wiki/v2/spaces/get_node?token=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;amp;obj_type=docx&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="step-4-fix-mermaid-blocks"&gt;Step 4: Fix Mermaid Blocks
+&lt;/h2&gt;&lt;p&gt;Mermaid code blocks are imported as plain text paragraphs (&lt;code&gt;block_type=2&lt;/code&gt;). You need to replace them with native mermaid diagram blocks (&lt;code&gt;block_type=40&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;⚠️ Process from bottom to top&lt;/strong&gt; to avoid index drift after deletion.&lt;/p&gt;
+&lt;h3 id="4a-find-flattened-mermaid-blocks"&gt;4a. Find flattened mermaid blocks
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -s -X GET &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/blocks?page_size=200&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; python3 -c &lt;span class="s2"&gt;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;import json, sys
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;data = json.load(sys.stdin)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;for item in data[&amp;#39;data&amp;#39;][&amp;#39;items&amp;#39;]:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; if item.get(&amp;#39;block_type&amp;#39;) != 2: continue
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; for el in item.get(&amp;#39;text&amp;#39;, {}).get(&amp;#39;elements&amp;#39;, []):
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; content = el.get(&amp;#39;text_run&amp;#39;, {}).get(&amp;#39;content&amp;#39;, &amp;#39;&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; if any(kw in content for kw in [&amp;#39;graph TD&amp;#39;, &amp;#39;graph LR&amp;#39;, &amp;#39;flowchart&amp;#39;, &amp;#39;sequenceDiagram&amp;#39;]):
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; print(f&amp;#39;FOUND: {item[\&amp;#34;block_id\&amp;#34;]} | {content[:100]}&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Detection heuristic: paragraphs (&lt;code&gt;type=2&lt;/code&gt;) containing arrow patterns (&lt;code&gt;--&amp;gt;&lt;/code&gt;) plus mermaid keywords (&lt;code&gt;graph&lt;/code&gt;, &lt;code&gt;flowchart&lt;/code&gt;, &lt;code&gt;subgraph&lt;/code&gt;).&lt;/p&gt;
+&lt;h3 id="4b-get-block-index"&gt;4b. Get block index
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -s -X GET &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/blocks/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; python3 -c &lt;span class="s2"&gt;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;import json, sys
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;data = json.load(sys.stdin)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;children = data[&amp;#39;data&amp;#39;][&amp;#39;block&amp;#39;][&amp;#39;children&amp;#39;]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;target = &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;BLOCK_ID&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;for i, c in enumerate(children):
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; if c == target:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; print(f&amp;#39;Index: {i}&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="4c-create-mermaid-diagram-block"&gt;4c. Create mermaid diagram block
+&lt;/h3&gt;&lt;p&gt;The key structure for a Mermaid block:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;block_type&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;add_ons&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;component_type_id&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;blk_631fefbbae02400430b8f9f4&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;data\&amp;#34;:\&amp;#34;graph TD\\n A --&amp;gt; B\&amp;#34;,\&amp;#34;theme\&amp;#34;:\&amp;#34;default\&amp;#34;,\&amp;#34;view\&amp;#34;:\&amp;#34;chart\&amp;#34;}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;component_type_id&lt;/code&gt; is fixed: &lt;code&gt;blk_631fefbbae02400430b8f9f4&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;record&lt;/code&gt; is a &lt;strong&gt;JSON string&lt;/strong&gt; (double-encoded in request body)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;record.data&lt;/code&gt;: raw mermaid code, &lt;code&gt;\n&lt;/code&gt; for newlines&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;record.view&lt;/code&gt;: &lt;code&gt;&amp;quot;chart&amp;quot;&lt;/code&gt; renders the diagram&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;RECORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;python3 -c &lt;span class="s2"&gt;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;import json
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;data = {&amp;#39;data&amp;#39;: &amp;#39;&amp;#39;&amp;#39;graph LR
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; A --&amp;gt; B --&amp;gt; C&amp;#39;&amp;#39;&amp;#39;, &amp;#39;theme&amp;#39;: &amp;#39;default&amp;#39;, &amp;#39;view&amp;#39;: &amp;#39;chart&amp;#39;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;print(json.dumps(json.dumps(data, ensure_ascii=False)))
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -s -X POST &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/blocks/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/children&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;children\&amp;#34;: [{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;block_type\&amp;#34;: 40,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;add_ons\&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;component_type_id\&amp;#34;: \&amp;#34;blk_631fefbbae02400430b8f9f4\&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;record\&amp;#34;: &lt;/span&gt;&lt;span class="nv"&gt;$RECORD&lt;/span&gt;&lt;span class="s2"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; }],
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;index\&amp;#34;: &lt;/span&gt;&lt;span class="k"&gt;$((&lt;/span&gt;BLOCK_INDEX &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;))&lt;/span&gt;&lt;span class="s2"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; }&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="4d-delete-old-flattened-text-block"&gt;4d. Delete old flattened text block
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -s -X DELETE &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/blocks/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/children/batch_delete&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;start_index\&amp;#34;: &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;BLOCK_INDEX&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;, \&amp;#34;end_index\&amp;#34;: &lt;/span&gt;&lt;span class="k"&gt;$((&lt;/span&gt;BLOCK_INDEX &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;))&lt;/span&gt;&lt;span class="s2"&gt;}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="record-encoding-helper"&gt;Record encoding helper
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;mermaid_code&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&amp;#34;&amp;#34;graph TD
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; A[Start] --&amp;gt; B[Process]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; B --&amp;gt; C&lt;/span&gt;&lt;span class="si"&gt;{Decision}&lt;/span&gt;&lt;span class="s2"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; C --&amp;gt;|Yes| D[End]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; C --&amp;gt;|No| B&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;data&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mermaid_code&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;theme&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;default&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;view&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;chart&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="n"&gt;ensure_ascii&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# For curl request body, double-encode:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;request_record&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="block-type-reference"&gt;Block Type Reference
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Notes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Page (root)&lt;/td&gt;
+&lt;td&gt;Document root&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;Text/Paragraph&lt;/td&gt;
+&lt;td&gt;Where mermaid gets flattened to&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3-8&lt;/td&gt;
+&lt;td&gt;Heading 1-6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;Bullet List&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;Ordered List&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;Code Block&lt;/td&gt;
+&lt;td&gt;Syntax highlighting only — &lt;strong&gt;does NOT render mermaid&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;Quote&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;Callout&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;31&lt;/td&gt;
+&lt;td&gt;Table&lt;/td&gt;
+&lt;td&gt;Has type-32 table_cell children&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;40&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Add-ons&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Mermaid diagrams live here&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="api-endpoints-summary"&gt;API Endpoints Summary
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Step&lt;/th&gt;
+&lt;th&gt;Method&lt;/th&gt;
+&lt;th&gt;Endpoint&lt;/th&gt;
+&lt;th&gt;Auth&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Import&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/import&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;TAT or UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Transfer&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/drive/v1/permissions/{token}/members/transfer_owner?type=docx&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;TAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Move to Wiki&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/wiki/v2/spaces/{space_id}/nodes/move_docs_to_wiki&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;List blocks&lt;/td&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/{doc_id}/blocks&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Get block&lt;/td&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/{doc_id}/blocks/{block_id}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Create block&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/{doc_id}/blocks/{parent_id}/children&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Delete blocks&lt;/td&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/{doc_id}/blocks/{parent_id}/children/batch_delete&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Get wiki node&lt;/td&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/wiki/v2/spaces/get_node?token={token}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="gotchas--lessons-learned"&gt;Gotchas &amp;amp; Lessons Learned
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Issue&lt;/th&gt;
+&lt;th&gt;Solution&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Wiki move fails after ownership transfer&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Sleep 3 seconds&lt;/strong&gt; between transfer and move&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Mermaid flattened to plain text&lt;/td&gt;
+&lt;td&gt;Post-process with block API (type 40)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Code block (type 14) doesn&amp;rsquo;t render mermaid&lt;/td&gt;
+&lt;td&gt;Must use type 40 add_ons&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PATCH cannot change block_type&lt;/td&gt;
+&lt;td&gt;Create new block + delete old block&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Block indices shift after delete&lt;/td&gt;
+&lt;td&gt;Process bottom to top&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;record&lt;/code&gt; field encoding&lt;/td&gt;
+&lt;td&gt;Double-encode: &lt;code&gt;json.dumps(json.dumps(data))&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Lost wiki_token&lt;/td&gt;
+&lt;td&gt;Retrieve via &lt;code&gt;get_node?token={doc_token}&amp;amp;obj_type=docx&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TAT can&amp;rsquo;t move docs to wiki&lt;/td&gt;
+&lt;td&gt;Transfer ownership first, then use UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Chinese in API payloads&lt;/td&gt;
+&lt;td&gt;Some endpoints need &lt;code&gt;\uXXXX&lt;/code&gt; escaping&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Wiki node deletion&lt;/td&gt;
+&lt;td&gt;Not supported via API — manual only&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</description></item><item><title>OpenCode + Oh-My-OpenCode 配置指南</title><link>https://blog.mjshao.fun/p/opencode-ohmyopencode-config/</link><pubDate>Mon, 02 Feb 2026 10:00:00 +0800</pubDate><guid>https://blog.mjshao.fun/p/opencode-ohmyopencode-config/</guid><description>&lt;img src="https://blog.mjshao.fun/p/opencode-ohmyopencode-config/cover.png" alt="Featured image of post OpenCode + Oh-My-OpenCode 配置指南" /&gt;&lt;blockquote&gt;
+&lt;p&gt;记录于 2026-01-26，更新于 2026-02-02&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="配置文件位置"&gt;配置文件位置
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;文件&lt;/th&gt;
+&lt;th&gt;路径&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;opencode.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;~/.config/opencode/opencode.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;OpenCode 主配置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;oh-my-opencode.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;~/.config/opencode/oh-my-opencode.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;插件配置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;mcp.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;~/.config/opencode/mcp.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;MCP 服务器配置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ui.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;~/.config/opencode/ui.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UI 外观配置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;项目级配置&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.opencode/oh-my-opencode.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;项目覆盖配置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;模型缓存&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;~/.cache/opencode/models.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;远程模型列表缓存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;插件安装&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;~/.local/share/opencode/&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;插件和依赖&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="配置层级关系"&gt;配置层级关系
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;┌─────────────────────────────────────────────────────────────────┐&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="n"&gt;opencode&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;┌───────────────────────────────────────────────────────────┐&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="mf"&gt;1.&lt;/span&gt; &lt;span class="err"&gt;定义&lt;/span&gt; &lt;span class="n"&gt;PROVIDER&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;模型访问渠道&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;anthropic&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;claudecode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;relay&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lmstudio&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;baseURL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;apiKey&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="mf"&gt;2.&lt;/span&gt; &lt;span class="err"&gt;定义&lt;/span&gt; &lt;span class="n"&gt;MODELS&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;模型能力&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="n"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;variants&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;modalities&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="mf"&gt;3.&lt;/span&gt; &lt;span class="err"&gt;设置主&lt;/span&gt; &lt;span class="n"&gt;MODEL&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fallback&lt;/span&gt; &lt;span class="err"&gt;默认值&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;provider/model-name&amp;#34;&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="mf"&gt;4.&lt;/span&gt; &lt;span class="err"&gt;加载&lt;/span&gt; &lt;span class="n"&gt;PLUGINS&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;plugin&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;oh-my-opencode&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;└───────────────────────────────────────────────────────────┘&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;↓&lt;/span&gt; &lt;span class="err"&gt;提供模型池&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;└─────────────────────────────────────────────────────────────────┘&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="err"&gt;↓&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;┌─────────────────────────────────────────────────────────────────┐&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="n"&gt;oh&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;my&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;opencode&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;┌───────────────────────────────────────────────────────────┐&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="mf"&gt;1.&lt;/span&gt; &lt;span class="err"&gt;分配&lt;/span&gt; &lt;span class="n"&gt;AGENTS&lt;/span&gt; &lt;span class="err"&gt;使用哪个模型&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="err"&gt;从&lt;/span&gt; &lt;span class="n"&gt;opencode&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="err"&gt;的模型池中选择&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="mf"&gt;2.&lt;/span&gt; &lt;span class="err"&gt;开关&lt;/span&gt; &lt;span class="n"&gt;FEATURES&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;background_tasks&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lsp_tools&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hooks&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="mf"&gt;3.&lt;/span&gt; &lt;span class="err"&gt;配置&lt;/span&gt; &lt;span class="n"&gt;UI&lt;/span&gt; &lt;span class="err"&gt;显示&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;└───────────────────────────────────────────────────────────┘&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;└─────────────────────────────────────────────────────────────────┘&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="oh-my-opencode-智能体-agents"&gt;Oh-My-OpenCode 智能体 (Agents)
+&lt;/h2&gt;&lt;h3 id="核心智能体"&gt;核心智能体
+&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;智能体&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;th&gt;推荐模型&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Sisyphus&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;主智能体，像开发团队负责人&lt;/td&gt;
+&lt;td&gt;Opus 4.5 (最强)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Prometheus&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;规划智能体，生成 .sisyphus/plans/*.md&lt;/td&gt;
+&lt;td&gt;Opus 4.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Atlas&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;计划执行编排，协调子任务&lt;/td&gt;
+&lt;td&gt;Sonnet 4.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Oracle&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;高 IQ 顾问，架构设计和复杂调试&lt;/td&gt;
+&lt;td&gt;Opus 4.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="辅助智能体"&gt;辅助智能体
+&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;智能体&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;th&gt;推荐模型&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Hephaestus&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;自主深度工作者，目标导向执行（工匠）&lt;/td&gt;
+&lt;td&gt;Opus 4.5 / GPT 5.2 Codex&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Librarian&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;搜索官方文档、开源实现&lt;/td&gt;
+&lt;td&gt;Sonnet 4.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Explore&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;快速上下文感知 grep，代码库探索&lt;/td&gt;
+&lt;td&gt;Haiku 4.5 (快速)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Sisyphus-Junior&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;子任务执行，被委派的工作&lt;/td&gt;
+&lt;td&gt;Sonnet 4.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Multimodal-Looker&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;图片/PDF 分析&lt;/td&gt;
+&lt;td&gt;Gemini 3 Pro (多模态)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Frontend-UI-UX&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;前端开发专家&lt;/td&gt;
+&lt;td&gt;Gemini 3 Pro High&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Document-Writer&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;文档写作&lt;/td&gt;
+&lt;td&gt;Sonnet 4.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Metis&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;计划前置咨询&lt;/td&gt;
+&lt;td&gt;Opus 4.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Momus&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;工作计划审查&lt;/td&gt;
+&lt;td&gt;Sonnet 4.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Hephaestus 注意&lt;/strong&gt;: 如果未在 oh-my-opencode.json 配置，会报错 &lt;code&gt;Agent hephaestus's configured model opencode/gpt-5.2-codex is not valid&lt;/code&gt;。必须显式配置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="模型选择机制"&gt;模型选择机制
+&lt;/h2&gt;&lt;h3 id="fallback-chain-内置默认"&gt;Fallback Chain (内置默认)
+&lt;/h3&gt;&lt;p&gt;Oh-My-OpenCode 为每个智能体定义了优先级链：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;sisyphus&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;fallbackChain&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;providers&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;anthropic&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="nx"&gt;model&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;claude-opus-4-5&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="c1"&gt;// 第1优先
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;providers&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;openai&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="nx"&gt;model&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;gpt-5.2-codex&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;providers&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;google&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="nx"&gt;model&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;gemini-3-pro&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;解析顺序：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;检查 &lt;code&gt;oh-my-opencode.json&lt;/code&gt; 中是否显式配置&lt;/li&gt;
+&lt;li&gt;如果没有，检查用户可用的 provider&lt;/li&gt;
+&lt;li&gt;选择 fallback chain 中第一个可用的模型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="prometheus-特殊处理"&gt;Prometheus 特殊处理
+&lt;/h3&gt;&lt;p&gt;Prometheus 不使用 fallback chain，直接使用主 model：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;resolvedModel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;prometheusOverride&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;model&lt;/span&gt; &lt;span class="o"&gt;??&lt;/span&gt; &lt;span class="nx"&gt;defaultModel&lt;/span&gt; &lt;span class="c1"&gt;// 无 fallback chain
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;因此必须显式配置 Prometheus，否则会用 opencode.json 的主 model。&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="推荐配置策略"&gt;推荐配置策略
+&lt;/h2&gt;&lt;h3 id="资源分配原则"&gt;资源分配原则
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;无限制资源 (Relay) 有限资源 (Antigravity)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── 核心工作流 └── 仅多模态场景
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── Opus: 规划/顾问 └── Gemini 3 Pro High
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── Sonnet: 执行/搜索
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└── Haiku: 快速探索
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="示例配置使用-claudecode-relay--antigravity"&gt;示例配置（使用 claudecode-relay + Antigravity）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;oh-my-opencode.json:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;span class="lnt"&gt;39
+&lt;/span&gt;&lt;span class="lnt"&gt;40
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;$schema&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;agents&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;sisyphus&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;claudecode-relay/claude-opus-4-5-20251101&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;variant&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;high&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;prometheus&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;claudecode-relay/claude-opus-4-5-20251101&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;variant&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;max&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;hephaestus&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;claudecode-relay/claude-opus-4-5-20251101&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;variant&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;high&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;oracle&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;claudecode-relay/claude-opus-4-5-20251101&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;variant&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;high&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;atlas&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;google/antigravity-gemini-3-pro&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;variant&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;high&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;librarian&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;claudecode-relay/claude-sonnet-4-5-20250929&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;variant&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;low&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;explore&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;claudecode-relay/claude-haiku-4-5-20251001&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;variant&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;low&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;multimodal-looker&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;google/antigravity-gemini-3-pro&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;variant&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;high&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;experimental&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;aggressive_truncation&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;资源分配策略：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心决策&lt;/strong&gt; (sisyphus, prometheus, oracle, hephaestus): Opus 4.5 — 需要最强推理能力&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;快速执行&lt;/strong&gt; (atlas): Gemini 3 Pro — 快速响应，成本低&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;搜索&lt;/strong&gt; (librarian): Sonnet 4.5 — 平衡能力与成本&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;探索&lt;/strong&gt; (explore): Haiku 4.5 — 纯速度，用于 grep 式搜索&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多模态&lt;/strong&gt; (multimodal-looker): Gemini 3 Pro — 原生视觉支持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="variant-使用"&gt;Variant 使用
+&lt;/h2&gt;&lt;h3 id="gemini-模型-thinkinglevel"&gt;Gemini 模型 (thinkingLevel)
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;antigravity-gemini-3-pro&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;variants&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;low&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;thinkingLevel&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;low&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;high&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;thinkingLevel&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;high&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="claude-模型-thinking-budgettokens"&gt;Claude 模型 (thinking budgetTokens)
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;claude-opus-4-5-20251101&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Opus 4.5&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;limit&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;context&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;200000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;output&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;64000&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;options&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;thinking&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;budgetTokens&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;16000&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;variants&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;low&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;options&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;thinking&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;budgetTokens&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;8192&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;high&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;options&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;thinking&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;budgetTokens&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;16000&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;max&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;options&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;thinking&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;&amp;#34;budgetTokens&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;32768&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="在-oh-my-opencodejson-使用"&gt;在 oh-my-opencode.json 使用
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;sisyphus&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;claudecode-relay/claude-opus-4-5-20251101&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;variant&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;high&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;multimodal-looker&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;model&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;google/antigravity-gemini-3-pro&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;variant&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;high&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="常用操作"&gt;常用操作
+&lt;/h2&gt;&lt;h3 id="清除模型缓存"&gt;清除模型缓存
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;rm ~/.cache/opencode/models.json
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 重启 OpenCode 会重新拉取&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="查看插件版本"&gt;查看插件版本
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cat ~/.local/share/opencode/node_modules/oh-my-opencode/package.json &lt;span class="p"&gt;|&lt;/span&gt; grep version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="验证配置"&gt;验证配置
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 检查 JSON 语法&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cat ~/.config/opencode/opencode.json &lt;span class="p"&gt;|&lt;/span&gt; jq .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cat ~/.config/opencode/oh-my-opencode.json &lt;span class="p"&gt;|&lt;/span&gt; jq .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="魔法词"&gt;魔法词
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;关键词&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ultrawork&lt;/code&gt; / &lt;code&gt;ulw&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;启用所有增强功能，持续工作直到完成&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/start-work&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;从 Prometheus 计划开始执行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/ralph-loop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;自我引用开发循环&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="核心功能开关"&gt;核心功能开关
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;features&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;background_tasks&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// 并行后台任务
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;todo_enforcer&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// 强制完成 TODO
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;session_management&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// 会话管理
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;lsp_tools&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// LSP 重构工具
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;ast_grep&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// AST 代码搜索
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;hooks&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// 钩子系统
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;skills&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// 技能系统
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcps&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt; &lt;span class="c1"&gt;// MCP 集成
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="shell-配置-ai-agent-兼容"&gt;Shell 配置 (AI Agent 兼容)
+&lt;/h2&gt;&lt;h3 id="问题"&gt;问题
+&lt;/h3&gt;&lt;p&gt;AI Agent 执行命令时是 &lt;strong&gt;non-interactive shell&lt;/strong&gt;，不会加载 &lt;code&gt;~/.zshrc&lt;/code&gt;，导致 PATH 不完整。&lt;/p&gt;
+&lt;h3 id="解决方案"&gt;解决方案
+&lt;/h3&gt;&lt;p&gt;创建 &lt;code&gt;~/.zshenv&lt;/code&gt;（所有 zsh 进程都会加载）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# ~/.zshenv&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;/opt/homebrew/bin:&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="shell-配置文件加载顺序"&gt;Shell 配置文件加载顺序
+&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;文件&lt;/th&gt;
+&lt;th&gt;加载时机&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;~/.zshenv&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;所有&lt;/strong&gt; zsh 进程&lt;/td&gt;
+&lt;td&gt;PATH 等基础环境变量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;~/.zprofile&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;login shell&lt;/td&gt;
+&lt;td&gt;登录时执行一次&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;~/.zshrc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;interactive shell&lt;/td&gt;
+&lt;td&gt;alias、prompt、补全等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;AI Agent 只能访问 &lt;code&gt;~/.zshenv&lt;/code&gt; 中的配置！&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="已知问题"&gt;已知问题
+&lt;/h2&gt;&lt;h3 id="attach-client-每次刷新-modelsdev"&gt;attach client 每次刷新 models.dev
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;: 使用 &lt;code&gt;opencode attach&lt;/code&gt; 连接到已有 server 时，client 仍然每次请求 models.dev，导致 ~1 秒延迟。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;状态&lt;/strong&gt;: 已提交 issue &lt;a class="link" href="https://github.com/anomalyco/opencode/issues/10781" target="_blank" rel="noopener"
+&gt;https://github.com/anomalyco/opencode/issues/10781&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;临时方案&lt;/strong&gt;: 无，等待官方修复。&lt;/p&gt;
+&lt;h3 id="oh-my-opencode-插件加载时间"&gt;oh-my-opencode 插件加载时间
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;: oh-my-opencode 增加约 0.8 秒启动时间（初始化 agents、hooks、tools 等）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这是功能丰富的代价&lt;/strong&gt;，无法避免。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="mcp-启用禁用"&gt;MCP 启用/禁用
+&lt;/h2&gt;&lt;p&gt;MCP 配置在 &lt;code&gt;opencode.json&lt;/code&gt; 的 &lt;code&gt;mcp&lt;/code&gt; 字段，通过 &lt;code&gt;enabled&lt;/code&gt; 控制：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;filesystem&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;local&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;command&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;/opt/homebrew/bin/mcp-server-filesystem&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/Users/mingjian/Documents/sync&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="c1"&gt;// 改为 false 禁用
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;environment&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;PATH&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;: &lt;code&gt;mcp.json&lt;/code&gt; 是另一个文件（可能用于其他 client），&lt;code&gt;opencode.json&lt;/code&gt; 中的 &lt;code&gt;mcp&lt;/code&gt; 字段才是 OpenCode 读取的配置。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="注意事项"&gt;注意事项
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;模型引用必须匹配&lt;/strong&gt;: oh-my-opencode.json 引用的模型必须在 opencode.json 中定义&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;显式配置所有智能体&lt;/strong&gt;: 避免依赖 fallback chain 带来的不确定性（尤其是 Hephaestus）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主 model 是必须的&lt;/strong&gt;: oh-my-opencode 要求 opencode.json 必须定义主 model&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缓存可能过期&lt;/strong&gt;: 如果看到不存在的模型，清除 &lt;code&gt;~/.cache/opencode/models.json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;JSON 语法&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;不支持尾随逗号（&lt;code&gt;},&lt;/code&gt; 后面不能没有下一项）&lt;/li&gt;
+&lt;li&gt;每个 &lt;code&gt;&amp;quot;key&amp;quot;: &amp;quot;value&amp;quot;&lt;/code&gt; 后必须有逗号（除非是最后一项）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hephaestus 必须配置&lt;/strong&gt;: 否则会报 &lt;code&gt;model opencode/gpt-5.2-codex is not valid&lt;/code&gt; 错误&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>New Homepage with Magic Portfolio</title><link>https://blog.mjshao.fun/p/new-homepage-magic-portfolio/</link><pubDate>Thu, 29 Jan 2026 10:00:00 +0800</pubDate><guid>https://blog.mjshao.fun/p/new-homepage-magic-portfolio/</guid><description>&lt;img src="https://blog.mjshao.fun/p/new-homepage-magic-portfolio/cover.jpg" alt="Featured image of post New Homepage with Magic Portfolio" /&gt;&lt;p&gt;&lt;img src="https://blog.mjshao.fun/p/new-homepage-magic-portfolio/cover.jpg"
+width="1400"
+height="900"
+srcset="https://blog.mjshao.fun/p/new-homepage-magic-portfolio/cover_hu_a179afc13e53f518.jpg 480w, https://blog.mjshao.fun/p/new-homepage-magic-portfolio/cover_hu_8721f5d6cab58091.jpg 1024w"
+loading="lazy"
+alt="New Homepage"
+class="gallery-image"
+data-flex-grow="155"
+data-flex-basis="373px"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Migrating my main site to a Next.js portfolio hosted on Vercel.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="the-switch"&gt;The Switch
+&lt;/h2&gt;&lt;p&gt;I&amp;rsquo;ve moved my homepage (&lt;code&gt;mjshao.fun&lt;/code&gt;) from a static HTML page to &lt;a class="link" href="https://github.com/once-ui-system/magic-portfolio" target="_blank" rel="noopener"
+&gt;Magic Portfolio&lt;/a&gt;, a modern Next.js template built with Once UI.&lt;/p&gt;
+&lt;h3 id="why"&gt;Why?
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Better Design&lt;/strong&gt;: Clean, minimal, and responsive out of the box.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MDX Support&lt;/strong&gt;: Easy to add content and projects.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tech Stack&lt;/strong&gt;: Next.js 14 + React 19 + TypeScript.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="the-404-issue"&gt;The 404 Issue
+&lt;/h2&gt;&lt;p&gt;You might have noticed that &lt;code&gt;mjshao.fun/siliconlm&lt;/code&gt; is currently broken.&lt;/p&gt;
+&lt;p&gt;This is because &lt;code&gt;mjshao.fun&lt;/code&gt; now points to Vercel (Next.js app), which doesn&amp;rsquo;t know about my old GitHub Pages projects.&lt;/p&gt;
+&lt;h3 id="solution"&gt;Solution
+&lt;/h3&gt;&lt;p&gt;I&amp;rsquo;ve migrated the &lt;strong&gt;SiliconLM&lt;/strong&gt; documentation to this blog:&lt;/p&gt;
+&lt;p&gt;👉 &lt;a class="link" href="https://blog.mjshao.fun/p/siliconlm/" &gt;SiliconLM Project Page&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll be migrating other project links gradually.&lt;/p&gt;
+&lt;h2 id="tech-stack"&gt;Tech Stack
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Component&lt;/th&gt;
+&lt;th&gt;Technology&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Framework&lt;/td&gt;
+&lt;td&gt;Next.js 14 (App Router)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;UI Library&lt;/td&gt;
+&lt;td&gt;Once UI&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Styling&lt;/td&gt;
+&lt;td&gt;SCSS + CSS Modules&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Deployment&lt;/td&gt;
+&lt;td&gt;Vercel&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Check out the new homepage at &lt;a class="link" href="https://mjshao.fun" target="_blank" rel="noopener"
+&gt;mjshao.fun&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Browser MCP - Complete Setup Guide</title><link>https://blog.mjshao.fun/p/browser-mcp-setup/</link><pubDate>Wed, 28 Jan 2026 00:00:00 +0800</pubDate><guid>https://blog.mjshao.fun/p/browser-mcp-setup/</guid><description>&lt;img src="https://blog.mjshao.fun/p/browser-mcp-setup/cover.png" alt="Featured image of post Browser MCP - Complete Setup Guide" /&gt;&lt;blockquote&gt;
+&lt;p&gt;MCP server + Chrome extension for AI-powered browser automation&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="overview"&gt;Overview
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Browser MCP&lt;/strong&gt; allows AI applications (VS Code, Cursor, Claude, Windsurf) to automate your real browser.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Feature&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Fast&lt;/td&gt;
+&lt;td&gt;Local automation, no network latency&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Private&lt;/td&gt;
+&lt;td&gt;Activity stays on device&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Logged In&lt;/td&gt;
+&lt;td&gt;Uses existing browser profile &amp;amp; sessions&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Stealth&lt;/td&gt;
+&lt;td&gt;Avoids bot detection using real browser fingerprint&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="available-tools"&gt;Available Tools
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;Navigate&lt;/code&gt;, &lt;code&gt;Go Back&lt;/code&gt;, &lt;code&gt;Go Forward&lt;/code&gt;, &lt;code&gt;Wait&lt;/code&gt;, &lt;code&gt;Press Key&lt;/code&gt;, &lt;code&gt;Snapshot&lt;/code&gt;, &lt;code&gt;Click&lt;/code&gt;, &lt;code&gt;Drag &amp;amp; Drop&lt;/code&gt;, &lt;code&gt;Hover&lt;/code&gt;, &lt;code&gt;Type Text&lt;/code&gt;, &lt;code&gt;Get Console Logs&lt;/code&gt;, &lt;code&gt;Screenshot&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="installation"&gt;Installation
+&lt;/h2&gt;&lt;h3 id="step-1-prerequisites"&gt;Step 1: Prerequisites
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Ensure Node.js is installed (required)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;node --version &lt;span class="c1"&gt;# Should output v18+ &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# If not installed:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;brew install node &lt;span class="c1"&gt;# macOS&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="step-2-install-chrome-extension"&gt;Step 2: Install Chrome Extension
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Open Chrome and install the extension&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;open &lt;span class="s2"&gt;&amp;#34;https://chromewebstore.google.com/detail/browser-mcp-automate-your/bjfgambnhccakkhmkepdoekmckoijdlc&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Or search &amp;ldquo;Browser MCP&amp;rdquo; in Chrome Web Store.&lt;/p&gt;
+&lt;h3 id="step-3-configure-mcp-server"&gt;Step 3: Configure MCP Server
+&lt;/h3&gt;&lt;h4 id="for-cursor"&gt;For Cursor
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Open Cursor settings and add to MCP config:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Settings -&amp;gt; Tools -&amp;gt; New MCP Server -&amp;gt; paste config below&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="for-claude-desktop"&gt;For Claude Desktop
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Edit Claude config file&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# macOS:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;open ~/Library/Application&lt;span class="se"&gt;\ &lt;/span&gt;Support/Claude/claude_desktop_config.json
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Windows:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;notepad %APPDATA%&lt;span class="se"&gt;\C&lt;/span&gt;laude&lt;span class="se"&gt;\c&lt;/span&gt;laude_desktop_config.json
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="for-vs-code"&gt;For VS Code
+&lt;/h4&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Add to .vscode/settings.json or user settings&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;code ~/.config/Code/User/settings.json
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="mcp-server-configuration"&gt;MCP Server Configuration
+&lt;/h2&gt;&lt;h3 id="universal-config-all-apps"&gt;Universal Config (all apps)
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcpServers&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;browsermcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;command&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;npx&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;args&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;@browsermcp/mcp@latest&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="vs-code-config-settingsjson"&gt;VS Code Config (settings.json)
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;mcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;servers&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;browsermcp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;command&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;npx&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;args&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;@browsermcp/mcp@latest&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="one-shot-setup-script-macos"&gt;One-Shot Setup Script (macOS)
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;span class="lnt"&gt;39
+&lt;/span&gt;&lt;span class="lnt"&gt;40
+&lt;/span&gt;&lt;span class="lnt"&gt;41
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Browser MCP Complete Setup&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 1. Verify Node.js&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;if&lt;/span&gt; ! &lt;span class="nb"&gt;command&lt;/span&gt; -v node &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Installing Node.js...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; brew install node
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 2. Pre-cache the MCP package&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npx @browsermcp/mcp@latest --help 2&amp;gt;/dev/null &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 3. Create Claude Desktop config&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;CLAUDE_CONFIG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/Library/Application Support/Claude/claude_desktop_config.json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mkdir -p &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;dirname &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$CLAUDE_CONFIG&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cat &amp;gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$CLAUDE_CONFIG&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;&amp;lt; &amp;#39;EOF&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt; &amp;#34;mcpServers&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt; &amp;#34;browsermcp&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt; &amp;#34;command&amp;#34;: &amp;#34;npx&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt; &amp;#34;args&amp;#34;: [&amp;#34;@browsermcp/mcp@latest&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Claude Desktop configured&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 4. Open Chrome extension page&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;open &lt;span class="s2"&gt;&amp;#34;https://chromewebstore.google.com/detail/browser-mcp-automate-your/bjfgambnhccakkhmkepdoekmckoijdlc&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;Setup complete!
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;Next steps:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;1. Install the Browser MCP extension in Chrome (page should be open)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;2. Pin the extension to toolbar
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;3. Restart Claude Desktop
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;4. Click &amp;#39;Connect&amp;#39; in the extension when using
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="usage"&gt;Usage
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Open Browser MCP extension&lt;/strong&gt; in Chrome toolbar&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Click &amp;ldquo;Connect&amp;rdquo;&lt;/strong&gt; to connect current tab&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;In your AI app&lt;/strong&gt;, ask: &lt;code&gt;&amp;quot;Go to example.com and click the login button&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="example-prompts"&gt;Example Prompts
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;#34;Navigate to github.com and search for &amp;#39;browser mcp&amp;#39;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;#34;Fill out the contact form on this page&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;#34;Take a screenshot of the current page&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;#34;Click the &amp;#39;Submit&amp;#39; button&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="troubleshooting"&gt;Troubleshooting
+&lt;/h2&gt;&lt;h3 id="claude-desktop-double-start-bug"&gt;Claude Desktop Double-Start Bug
+&lt;/h3&gt;&lt;p&gt;Claude Desktop currently starts MCP servers twice (&lt;a class="link" href="https://github.com/modelcontextprotocol/servers/issues/812" target="_blank" rel="noopener"
+&gt;bug #812&lt;/a&gt;). You&amp;rsquo;ll see an error but it still works.&lt;/p&gt;
+&lt;h3 id="extension-not-connecting"&gt;Extension Not Connecting
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;Make sure you clicked &amp;ldquo;Connect&amp;rdquo; in the extension popup&lt;/li&gt;
+&lt;li&gt;Refresh the page and try again&lt;/li&gt;
+&lt;li&gt;Check that the MCP server is configured correctly&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="links"&gt;Links
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Resource&lt;/th&gt;
+&lt;th&gt;URL&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Website&lt;/td&gt;
+&lt;td&gt;&lt;a class="link" href="https://browsermcp.io" target="_blank" rel="noopener"
+&gt;https://browsermcp.io&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Docs&lt;/td&gt;
+&lt;td&gt;&lt;a class="link" href="https://docs.browsermcp.io" target="_blank" rel="noopener"
+&gt;https://docs.browsermcp.io&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;GitHub&lt;/td&gt;
+&lt;td&gt;&lt;a class="link" href="https://github.com/BrowserMCP/mcp" target="_blank" rel="noopener"
+&gt;https://github.com/BrowserMCP/mcp&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Chrome Extension&lt;/td&gt;
+&lt;td&gt;&lt;a class="link" href="https://chromewebstore.google.com/detail/bjfgambnhccakkhmkepdoekmckoijdlc" target="_blank" rel="noopener"
+&gt;Chrome Web Store&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</description></item><item><title>MDX 转 Apple Dictionary 完整指南</title><link>https://blog.mjshao.fun/p/mdx-to-apple-dictionary/</link><pubDate>Mon, 26 Jan 2026 16:13:22 +0800</pubDate><guid>https://blog.mjshao.fun/p/mdx-to-apple-dictionary/</guid><description>&lt;img src="https://blog.mjshao.fun/p/mdx-to-apple-dictionary/cover.jpg" alt="Featured image of post MDX 转 Apple Dictionary 完整指南" /&gt;&lt;p&gt;将 MDict (.mdx/.mdd) 词典转换为 macOS Apple Dictionary 格式。&lt;/p&gt;
+&lt;h2 id="推荐工具"&gt;推荐工具
+&lt;/h2&gt;&lt;p&gt;我写了一个自动化脚本 &lt;a class="link" href="https://github.com/nxxxsooo/mdx2apple" target="_blank" rel="noopener"
+&gt;mdx2apple&lt;/a&gt;，可以一键完成整个转换流程：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/nxxxsooo/mdx2apple.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; mdx2apple
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip install pyglossary lxml beautifulsoup4 html5lib
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 一键转换并安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;python mdx2apple.py /path/to/dictionary.mdx --install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果你想了解手动转换的原理，继续往下看。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="手动转换指南"&gt;手动转换指南
+&lt;/h2&gt;&lt;h3 id="工具准备"&gt;工具准备
+&lt;/h3&gt;&lt;h3 id="1-安装-pyglossary"&gt;1. 安装 pyglossary
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip3 install --user pyglossary lxml beautifulsoup4 html5lib
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="2-安装-dictionary-development-kit-ddk"&gt;2. 安装 Dictionary Development Kit (DDK)
+&lt;/h3&gt;&lt;p&gt;从 GitHub 镜像安装（无需 Apple Developer 账号）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/ikey4u/macddk.git ~/Library/Developer/Dictionary-Development-Kit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="转换步骤"&gt;转换步骤
+&lt;/h2&gt;&lt;h3 id="step-1-mdx-转-appledict-源文件"&gt;Step 1: MDX 转 AppleDict 源文件
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pyglossary input.mdx output.apple --write-format&lt;span class="o"&gt;=&lt;/span&gt;AppleDict
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;生成的文件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;output.apple/&lt;/code&gt; 目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*.xml&lt;/code&gt; - 词典内容&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*.css&lt;/code&gt; - 样式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*.plist&lt;/code&gt; - 元数据&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Makefile&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OtherResources/&lt;/code&gt; - 音频、图片等资源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="step-2-关键修复"&gt;Step 2: 关键修复
+&lt;/h3&gt;&lt;h4 id="问题1css-缺少-displayblock"&gt;问题1：CSS 缺少 display:block
+&lt;/h4&gt;&lt;p&gt;原始 CSS 中 &lt;code&gt;d|entry {}&lt;/code&gt; 为空，导致内容不显示。&lt;/p&gt;
+&lt;p&gt;修复：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;d&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nt"&gt;entry&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="问题2html-结构过于复杂"&gt;问题2：HTML 结构过于复杂
+&lt;/h4&gt;&lt;p&gt;MDict HTML 包含大量自定义属性和复杂嵌套，Apple Dictionary 无法正确渲染。&lt;/p&gt;
+&lt;p&gt;解决方案：用 Python 清理 XML，保留核心内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;span class="lnt"&gt;8
+&lt;/span&gt;&lt;span class="lnt"&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;bs4&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;BeautifulSoup&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;clean_entry&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;entry&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 保留 d:entry 标签和 d:index 索引&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 提取：headword, pos, pronunciation, definitions, examples&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 移除：自定义属性(hclass, htag, idm_id等)、javascript、复杂嵌套&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 转义特殊字符：&amp;amp; &amp;lt; &amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="问题3plist-过于复杂"&gt;问题3：plist 过于复杂
+&lt;/h4&gt;&lt;p&gt;pyglossary 生成的 plist 可能有问题。使用简化版：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-xml" data-lang="xml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;&amp;lt;!DOCTYPE plist PUBLIC &amp;#34;-//Apple//DTD PLIST 1.0//EN&amp;#34; &amp;#34;...&amp;#34;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;plist&lt;/span&gt; &lt;span class="na"&gt;version=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;1.0&amp;#34;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;dict&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;CFBundleDevelopmentRegion&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;English&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;CFBundleIdentifier&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;com.example.dict&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;CFBundleDisplayName&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;My Dictionary&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;CFBundleName&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;MyDict&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;CFBundleShortVersionString&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;1.0&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;DCSDictionaryCopyright&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;Copyright&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;DCSDictionaryManufacturerName&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;Publisher&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;/dict&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;/plist&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="step-3-编译"&gt;Step 3: 编译
+&lt;/h3&gt;&lt;p&gt;修改 Makefile 中的 DDK 路径：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-makefile" data-lang="makefile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;DICT_BUILD_TOOL_DIR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;HOME&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;/Library/Developer/Dictionary-Development-Kit&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;DICT_BUILD_OPTS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; -v 10.11
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;资源文件太多会导致编译失败，需要先移走：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mv OtherResources /tmp/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;make
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mv /tmp/OtherResources ./
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="step-4-安装"&gt;Step 4: 安装
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 复制词典&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cp -R objects/MyDict.dictionary ~/Library/Dictionaries/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 添加资源（音频、图片）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;rsync -a OtherResources/ ~/Library/Dictionaries/MyDict.dictionary/Contents/Resources/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 清除缓存&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;rm -rf ~/Library/Caches/com.apple.Dictionary
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;killall Dictionary
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;killall DictionaryWorkerService
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="限制"&gt;限制
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;无音频播放&lt;/strong&gt;：Apple Dictionary 不支持 JavaScript 音频，MDict 的发音功能无法使用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;复杂排版丢失&lt;/strong&gt;：原始词典的复杂 CSS 样式大部分无法保留&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;大词典可能有问题&lt;/strong&gt;：6万+ 词条需要简化 HTML 结构才能正常显示&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="调试技巧"&gt;调试技巧
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;先测试小词典&lt;/strong&gt;：创建 100 条目的测试词典验证流程&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;检查 Body.data&lt;/strong&gt;：如果为空或很小，说明内容未正确编译&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;查看 Console.app&lt;/strong&gt;：搜索 &amp;ldquo;Dictionary&amp;rdquo; 相关日志&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;简化 plist&lt;/strong&gt;：复杂的 plist 设置可能导致问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="文件位置"&gt;文件位置
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;词典安装位置：&lt;code&gt;~/Library/Dictionaries/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;缓存位置：&lt;code&gt;~/Library/Caches/com.apple.Dictionary/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;DDK 位置：&lt;code&gt;~/Library/Developer/Dictionary-Development-Kit/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="参考"&gt;参考
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/ilius/pyglossary" target="_blank" rel="noopener"
+&gt;pyglossary&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/ikey4u/macddk" target="_blank" rel="noopener"
+&gt;DDK 镜像&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Apple Dictionary 格式文档: Apple Developer Documentation&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>SiliconLM</title><link>https://blog.mjshao.fun/p/siliconlm/</link><pubDate>Sun, 25 Jan 2026 02:05:13 +0800</pubDate><guid>https://blog.mjshao.fun/p/siliconlm/</guid><description>&lt;img src="https://blog.mjshao.fun/p/siliconlm/cover.png" alt="Featured image of post SiliconLM" /&gt;&lt;p&gt;&lt;img src="https://blog.mjshao.fun/p/siliconlm/cover.png"
+width="2384"
+height="1388"
+srcset="https://blog.mjshao.fun/p/siliconlm/cover_hu_885c3b1970a763a3.png 480w, https://blog.mjshao.fun/p/siliconlm/cover_hu_df57f7208a80cffc.png 1024w"
+loading="lazy"
+alt="SiliconLM Dashboard"
+class="gallery-image"
+data-flex-grow="171"
+data-flex-basis="412px"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Local LLM dashboard for Apple Silicon Macs. Manage models, services, embeddings, and downloads.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class="link" href="https://mjshao.fun/siliconlm/" target="_blank" rel="noopener"
+&gt;Project Website&lt;/a&gt; | &lt;a class="link" href="https://github.com/nxxxsooo/siliconlm" target="_blank" rel="noopener"
+&gt;GitHub Repository&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="features"&gt;Features
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Machine Info&lt;/strong&gt; - Chip, GPU cores, Neural Engine, RAM, disk at a glance&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MLX Embeddings Server&lt;/strong&gt; - OpenAI-compatible &lt;code&gt;/v1/embeddings&lt;/code&gt; API on port 8766&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-Backend Support&lt;/strong&gt; - MLX, mlx-lm (decoder models), sentence-transformers&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Service Management&lt;/strong&gt; - Start/stop LMStudio, MLX Embeddings, OpenCode&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Smart Proxy&lt;/strong&gt; - Routes &lt;code&gt;/v1/embeddings&lt;/code&gt; to MLX, &lt;code&gt;/v1/chat&lt;/code&gt; to LMStudio&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Model Downloads&lt;/strong&gt; - HuggingFace search + aria2 acceleration for large files&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Settings Panel&lt;/strong&gt; - Configure models directory, default embedding model&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="architecture"&gt;Architecture
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;CherryStudio / Client
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;http://localhost:8765/v1/* (SiliconLM Proxy)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ┌────┴────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼ ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/v1/embeddings /v1/chat/*
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼ ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;:8766 (MLX) :1234 (LMStudio)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ├─► MLX (bert, roberta)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ├─► mlx-lm (Qwen3, gte-Qwen2)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └─► sentence-transformers (bge-m3)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="supported-embedding-models"&gt;Supported Embedding Models
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Model&lt;/th&gt;
+&lt;th&gt;Backend&lt;/th&gt;
+&lt;th&gt;Dimensions&lt;/th&gt;
+&lt;th&gt;Speed&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;mixedbread-ai/mxbai-embed-large-v1&lt;/td&gt;
+&lt;td&gt;MLX&lt;/td&gt;
+&lt;td&gt;1024&lt;/td&gt;
+&lt;td&gt;Fast&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;BAAI/bge-m3&lt;/td&gt;
+&lt;td&gt;sentence-transformers&lt;/td&gt;
+&lt;td&gt;1024&lt;/td&gt;
+&lt;td&gt;Medium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mlx-community/Qwen3-Embedding-0.6B-4bit&lt;/td&gt;
+&lt;td&gt;mlx-lm&lt;/td&gt;
+&lt;td&gt;1024&lt;/td&gt;
+&lt;td&gt;Fast&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mlx-community/Qwen3-Embedding-8B-4bit&lt;/td&gt;
+&lt;td&gt;mlx-lm&lt;/td&gt;
+&lt;td&gt;4096&lt;/td&gt;
+&lt;td&gt;Medium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mlx-community/gte-Qwen2-7B-instruct-4bit&lt;/td&gt;
+&lt;td&gt;mlx-lm&lt;/td&gt;
+&lt;td&gt;3584&lt;/td&gt;
+&lt;td&gt;Medium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="tech-stack"&gt;Tech Stack
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Component&lt;/th&gt;
+&lt;th&gt;Technology&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Backend&lt;/td&gt;
+&lt;td&gt;FastAPI + uvicorn&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Frontend&lt;/td&gt;
+&lt;td&gt;TailwindCSS + Vanilla JS&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Embeddings&lt;/td&gt;
+&lt;td&gt;MLX + mlx-lm + sentence-transformers&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Downloads&lt;/td&gt;
+&lt;td&gt;huggingface_hub + aria2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proxy&lt;/td&gt;
+&lt;td&gt;httpx async&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="license"&gt;License
+&lt;/h2&gt;&lt;p&gt;MIT&lt;/p&gt;</description></item><item><title>Van Rysel EDR CF105</title><link>https://blog.mjshao.fun/p/van-rysel-edr-cf105/</link><pubDate>Thu, 30 May 2024 00:00:00 +0000</pubDate><guid>https://blog.mjshao.fun/p/van-rysel-edr-cf105/</guid><description>&lt;img src="https://blog.mjshao.fun/p/van-rysel-edr-cf105/decathlon-edr-cf105.jpg" alt="Featured image of post Van Rysel EDR CF105" /&gt;&lt;p&gt;没啥特别想说的，晒一下我的小车车。&lt;/p&gt;
+&lt;p&gt;23年11月10日在迪卡侬大郊亭店提的，型号是Van Rysel EDR CF 105。&lt;/p&gt;
+&lt;p&gt;这是一辆耐力圈刹车，喜欢圈刹车的轻量，好维护和稍有滞后的刹车手感。平时匀速25km/h的老年人正好合适。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.mjshao.fun/p/van-rysel-edr-cf105/decathlon-edr-cf105.jpg"
+width="2000"
+height="1500"
+srcset="https://blog.mjshao.fun/p/van-rysel-edr-cf105/decathlon-edr-cf105_hu_3a41290bacae0e7d.jpg 480w, https://blog.mjshao.fun/p/van-rysel-edr-cf105/decathlon-edr-cf105_hu_eae01eccf3133363.jpg 1024w"
+loading="lazy"
+alt="Van Rysel EDR CF105"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+&gt;&lt;/p&gt;</description></item><item><title>David Duchovny 开播客咯</title><link>https://blog.mjshao.fun/p/duchovny-podcast/</link><pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate><guid>https://blog.mjshao.fun/p/duchovny-podcast/</guid><description>&lt;img src="https://blog.mjshao.fun/p/duchovny-podcast/ddpodcast.jpeg" alt="Featured image of post David Duchovny 开播客咯" /&gt;</description></item><item><title>Archives</title><link>https://blog.mjshao.fun/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.mjshao.fun/archives/</guid><description/></item><item><title>Search</title><link>https://blog.mjshao.fun/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.mjshao.fun/search/</guid><description/></item></channel></rss>

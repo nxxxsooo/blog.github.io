@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apple Silicon on 明鉴的博客</title><link>https://blog.mjshao.fun/zh-cn/tags/apple-silicon/</link><description>Recent content in Apple Silicon on 明鉴的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 25 Jan 2026 02:05:13 +0800</lastBuildDate><atom:link href="https://blog.mjshao.fun/zh-cn/tags/apple-silicon/index.xml" rel="self" type="application/rss+xml"/><item><title>SiliconLM - Apple Silicon 本地大模型控制台</title><link>https://blog.mjshao.fun/zh-cn/p/siliconlm/</link><pubDate>Sun, 25 Jan 2026 02:05:13 +0800</pubDate><guid>https://blog.mjshao.fun/zh-cn/p/siliconlm/</guid><description>&lt;img src="https://blog.mjshao.fun/p/siliconlm/cover.png" alt="Featured image of post SiliconLM - Apple Silicon 本地大模型控制台" /&gt;&lt;p&gt;&lt;img src="https://blog.mjshao.fun/p/siliconlm/cover.png"
+width="2384"
+height="1388"
+srcset="https://blog.mjshao.fun/p/siliconlm/cover_hu_885c3b1970a763a3.png 480w, https://blog.mjshao.fun/p/siliconlm/cover_hu_df57f7208a80cffc.png 1024w"
+loading="lazy"
+alt="SiliconLM Dashboard"
+class="gallery-image"
+data-flex-grow="171"
+data-flex-basis="412px"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Apple Silicon Mac 本地大模型管理工具。管理模型、服务、Embedding 和下载。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class="link" href="https://mjshao.fun/siliconlm/" target="_blank" rel="noopener"
+&gt;项目主页&lt;/a&gt; | &lt;a class="link" href="https://github.com/nxxxsooo/siliconlm" target="_blank" rel="noopener"
+&gt;GitHub 仓库&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="功能特点"&gt;功能特点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;硬件信息&lt;/strong&gt; - 芯片、GPU 核心、Neural Engine、内存、磁盘一目了然&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MLX Embedding 服务&lt;/strong&gt; - 兼容 OpenAI 的 &lt;code&gt;/v1/embeddings&lt;/code&gt; API，端口 8766&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多后端支持&lt;/strong&gt; - MLX、mlx-lm（解码器模型）、sentence-transformers&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务管理&lt;/strong&gt; - 启停 LMStudio、MLX Embeddings、OpenCode&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;智能代理&lt;/strong&gt; - &lt;code&gt;/v1/embeddings&lt;/code&gt; 路由到 MLX，&lt;code&gt;/v1/chat&lt;/code&gt; 路由到 LMStudio&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模型下载&lt;/strong&gt; - HuggingFace 搜索 + aria2 加速大文件下载&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;设置面板&lt;/strong&gt; - 配置模型目录、默认 Embedding 模型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="架构"&gt;架构
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;CherryStudio / 客户端
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;http://localhost:8765/v1/* (SiliconLM 代理)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ┌────┴────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼ ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/v1/embeddings /v1/chat/*
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼ ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;:8766 (MLX) :1234 (LMStudio)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ├─► MLX (bert, roberta)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ├─► mlx-lm (Qwen3, gte-Qwen2)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └─► sentence-transformers (bge-m3)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="支持的-embedding-模型"&gt;支持的 Embedding 模型
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;模型&lt;/th&gt;
+&lt;th&gt;后端&lt;/th&gt;
+&lt;th&gt;维度&lt;/th&gt;
+&lt;th&gt;速度&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;mixedbread-ai/mxbai-embed-large-v1&lt;/td&gt;
+&lt;td&gt;MLX&lt;/td&gt;
+&lt;td&gt;1024&lt;/td&gt;
+&lt;td&gt;快&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;BAAI/bge-m3&lt;/td&gt;
+&lt;td&gt;sentence-transformers&lt;/td&gt;
+&lt;td&gt;1024&lt;/td&gt;
+&lt;td&gt;中等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mlx-community/Qwen3-Embedding-0.6B-4bit&lt;/td&gt;
+&lt;td&gt;mlx-lm&lt;/td&gt;
+&lt;td&gt;1024&lt;/td&gt;
+&lt;td&gt;快&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mlx-community/Qwen3-Embedding-8B-4bit&lt;/td&gt;
+&lt;td&gt;mlx-lm&lt;/td&gt;
+&lt;td&gt;4096&lt;/td&gt;
+&lt;td&gt;中等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mlx-community/gte-Qwen2-7B-instruct-4bit&lt;/td&gt;
+&lt;td&gt;mlx-lm&lt;/td&gt;
+&lt;td&gt;3584&lt;/td&gt;
+&lt;td&gt;中等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="技术栈"&gt;技术栈
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;组件&lt;/th&gt;
+&lt;th&gt;技术&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;后端&lt;/td&gt;
+&lt;td&gt;FastAPI + uvicorn&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;前端&lt;/td&gt;
+&lt;td&gt;TailwindCSS + Vanilla JS&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Embedding&lt;/td&gt;
+&lt;td&gt;MLX + mlx-lm + sentence-transformers&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;下载&lt;/td&gt;
+&lt;td&gt;huggingface_hub + aria2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;代理&lt;/td&gt;
+&lt;td&gt;httpx async&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="许可证"&gt;许可证
+&lt;/h2&gt;&lt;p&gt;MIT&lt;/p&gt;</description></item></channel></rss>

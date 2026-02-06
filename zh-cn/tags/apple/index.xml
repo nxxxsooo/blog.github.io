@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apple on 明鉴的博客</title><link>https://blog.mjshao.fun/zh-cn/tags/apple/</link><description>Recent content in Apple on 明鉴的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 06 Feb 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://blog.mjshao.fun/zh-cn/tags/apple/index.xml" rel="self" type="application/rss+xml"/><item><title>为什么我把充电上限设在 80%</title><link>https://blog.mjshao.fun/zh-cn/p/battery-charging-strategy/</link><pubDate>Fri, 06 Feb 2026 00:00:00 +0800</pubDate><guid>https://blog.mjshao.fun/zh-cn/p/battery-charging-strategy/</guid><description>&lt;img src="https://blog.mjshao.fun/p/battery-charging-strategy/cover.png" alt="Featured image of post 为什么我把充电上限设在 80%" /&gt;&lt;blockquote&gt;
+&lt;p&gt;电池最快的老化，不是来自使用，而是来自充满。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="我的配置"&gt;我的配置
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;设备&lt;/th&gt;
+&lt;th&gt;充电上限&lt;/th&gt;
+&lt;th&gt;日常模式&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;MacBook Pro M3 Max&lt;/td&gt;
+&lt;td&gt;80%&lt;/td&gt;
+&lt;td&gt;几乎一直插电，偶尔拔下来移动&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;iPhone Air&lt;/td&gt;
+&lt;td&gt;80%&lt;/td&gt;
+&lt;td&gt;70–80% 浅循环，办公室无线充 + 家里有线充 + 随身充电宝&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;两台设备基本随时都有电源。这是前提——如果你经常需要满电撑一整天，这个策略不适合你。&lt;/p&gt;
+&lt;h2 id="电池老化的两种机制"&gt;电池老化的两种机制
+&lt;/h2&gt;&lt;h3 id="1-循环老化使用导致"&gt;1. 循环老化（使用导致）
+&lt;/h3&gt;&lt;p&gt;每次充放电都会让锂离子在正负极之间移动，电极材料反复膨胀收缩，最终粉化、容量下降。&lt;/p&gt;
+&lt;p&gt;浅循环（70→80%）比深循环（0→100%）的损伤小得多。&lt;/p&gt;
+&lt;h3 id="2-日历老化不用也在发生"&gt;2. 日历老化（不用也在发生）
+&lt;/h3&gt;&lt;p&gt;即使不用，锂电池也在老化。电解液在高电压下自发分解，SEI 膜增厚、内阻增大；正极材料在高电压下结构不稳定，金属离子溶出。&lt;/p&gt;
+&lt;p&gt;速度取决于两个因素：&lt;strong&gt;温度&lt;/strong&gt;和&lt;strong&gt;荷电状态（电压）&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id="电压决定一切"&gt;电压决定一切
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;电量&lt;/th&gt;
+&lt;th&gt;电压&lt;/th&gt;
+&lt;th&gt;一年后容量&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;100%&lt;/td&gt;
+&lt;td&gt;~4.2V&lt;/td&gt;
+&lt;td&gt;~92–94%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;80%&lt;/td&gt;
+&lt;td&gt;~3.9V&lt;/td&gt;
+&lt;td&gt;~96–98%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;50%&lt;/td&gt;
+&lt;td&gt;~3.6V&lt;/td&gt;
+&lt;td&gt;~98–99%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;100% 和 80% 之间仅 0.3V 的差别，对化学降解速度的影响是巨大的。&lt;/p&gt;
+&lt;h2 id="为什么一直插着充满最伤电池"&gt;为什么「一直插着充满」最伤电池
+&lt;/h2&gt;&lt;p&gt;设备挂在充电器上满电时，实际在做什么：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;充到 100%（4.2V）&lt;/li&gt;
+&lt;li&gt;充电器停止 → 电池自然微放到 99%&lt;/li&gt;
+&lt;li&gt;充电器检测到 → 立刻补回 100%&lt;/li&gt;
+&lt;li&gt;无限循环&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;结果：电池 24 小时保持在最高电压 4.2V，日历老化速度拉满，还附带无数次 99→100 微循环。&lt;/p&gt;
+&lt;h2 id="80-上限到底解决了什么"&gt;80% 上限到底解决了什么
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;电池稳定在 &lt;strong&gt;3.9V&lt;/strong&gt; 附近，化学降解大幅放缓&lt;/li&gt;
+&lt;li&gt;70–80% 的电压区间（3.8–3.9V）是锂电池&lt;strong&gt;应力最小&lt;/strong&gt;的区间&lt;/li&gt;
+&lt;li&gt;10% 深度的浅循环对电极&lt;strong&gt;几乎零损伤&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="但我经常拔插-mac-啊"&gt;「但我经常拔插 Mac 啊」
+&lt;/h2&gt;&lt;p&gt;常见顾虑：&lt;em&gt;「80% 上限，拔个插头移动一下就在用电池循环了」&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;这个担心不成立：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;循环次数 = &lt;strong&gt;累计放电量&lt;/strong&gt; ÷ 电池容量&lt;/li&gt;
+&lt;li&gt;每次拔插掉 1–2%，需要 &lt;strong&gt;50–100 次拔插&lt;/strong&gt;才算一个完整循环&lt;/li&gt;
+&lt;li&gt;保持 3.9V 而不是 4.2V &lt;strong&gt;避免的日历老化&lt;/strong&gt;，远比这点浅循环重要&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="什么时候不该用-80"&gt;什么时候不该用 80%
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;❌ 经常一整天在外面没有电源 → 考虑设 85–90%&lt;/li&gt;
+&lt;li&gt;❌ 出差旅行需要最大续航 → 临时关闭限制&lt;/li&gt;
+&lt;li&gt;✅ 大部分时间在桌前有电源 → &lt;strong&gt;完美场景&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;✅ 随身带充电宝 → 续航焦虑消除&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="长期存放"&gt;长期存放
+&lt;/h2&gt;&lt;p&gt;设备长期不用时，充到 &lt;strong&gt;50%&lt;/strong&gt; 后关机存放。这是锂电池化学最稳定的状态。&lt;/p&gt;
+&lt;h2 id="前提条件"&gt;前提条件
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;macOS Sequoia+ 或 iOS 18+（原生充电上限设置）&lt;/li&gt;
+&lt;li&gt;设备大部分时间有电源&lt;/li&gt;
+&lt;li&gt;充电宝或多个充电器备着&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

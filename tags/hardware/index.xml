@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hardware on Mingjian</title><link>https://blog.mjshao.fun/tags/hardware/</link><description>Recent content in Hardware on Mingjian</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 06 Feb 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://blog.mjshao.fun/tags/hardware/index.xml" rel="self" type="application/rss+xml"/><item><title>Why I Cap My Batteries at 80%</title><link>https://blog.mjshao.fun/p/battery-charging-strategy/</link><pubDate>Fri, 06 Feb 2026 00:00:00 +0800</pubDate><guid>https://blog.mjshao.fun/p/battery-charging-strategy/</guid><description>&lt;img src="https://blog.mjshao.fun/p/battery-charging-strategy/cover.png" alt="Featured image of post Why I Cap My Batteries at 80%" /&gt;&lt;blockquote&gt;
+&lt;p&gt;Your battery degrades fastest when it&amp;rsquo;s full — not when it&amp;rsquo;s used.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="my-setup"&gt;My Setup
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Device&lt;/th&gt;
+&lt;th&gt;Charge Limit&lt;/th&gt;
+&lt;th&gt;Daily Pattern&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;MacBook Pro M3 Max&lt;/td&gt;
+&lt;td&gt;80%&lt;/td&gt;
+&lt;td&gt;Plugged in most of the time, occasionally unplugged to move around&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;iPhone Air&lt;/td&gt;
+&lt;td&gt;80%&lt;/td&gt;
+&lt;td&gt;Shallow 70–80% cycles, wireless charging at the office + cable at home + power bank on the go&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Both devices almost always have access to power. That&amp;rsquo;s the key prerequisite — this strategy doesn&amp;rsquo;t work if you regularly need a full charge to get through the day.&lt;/p&gt;
+&lt;h2 id="two-ways-batteries-die"&gt;Two Ways Batteries Die
+&lt;/h2&gt;&lt;h3 id="1-cycle-aging-from-use"&gt;1. Cycle Aging (from use)
+&lt;/h3&gt;&lt;p&gt;Every charge-discharge cycle forces lithium ions between electrodes, causing the electrode material to expand and contract. Over time this leads to cracking and capacity loss.&lt;/p&gt;
+&lt;p&gt;Shallow cycles (70→80%) cause dramatically less stress than deep cycles (0→100%).&lt;/p&gt;
+&lt;h3 id="2-calendar-aging-just-from-existing"&gt;2. Calendar Aging (just from existing)
+&lt;/h3&gt;&lt;p&gt;Even sitting idle, a lithium battery degrades. The electrolyte slowly decomposes at high voltage, thickening the SEI layer and increasing internal resistance. The cathode structure becomes unstable, leaching metal ions.&lt;/p&gt;
+&lt;p&gt;Two factors control the speed: &lt;strong&gt;temperature&lt;/strong&gt; and &lt;strong&gt;state of charge (voltage)&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id="voltage-is-everything"&gt;Voltage Is Everything
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Charge&lt;/th&gt;
+&lt;th&gt;Voltage&lt;/th&gt;
+&lt;th&gt;Capacity After 1 Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;100%&lt;/td&gt;
+&lt;td&gt;~4.2V&lt;/td&gt;
+&lt;td&gt;~92–94%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;80%&lt;/td&gt;
+&lt;td&gt;~3.9V&lt;/td&gt;
+&lt;td&gt;~96–98%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;50%&lt;/td&gt;
+&lt;td&gt;~3.6V&lt;/td&gt;
+&lt;td&gt;~98–99%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;A mere 0.3V difference between 100% and 80% has a massive impact on chemical degradation rate.&lt;/p&gt;
+&lt;h2 id="why-always-plugged-in-at-100-is-the-worst"&gt;Why &amp;ldquo;Always Plugged In at 100%&amp;rdquo; Is the Worst
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s what happens when your device sits on a charger at full:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Charges to 100% (4.2V)&lt;/li&gt;
+&lt;li&gt;Charger stops → battery naturally drops to 99%&lt;/li&gt;
+&lt;li&gt;Charger detects the drop → immediately tops back up&lt;/li&gt;
+&lt;li&gt;Repeat forever&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The result: your battery sits at maximum voltage 24/7, maximizing calendar aging, plus accumulating countless 99→100% micro-cycles on top.&lt;/p&gt;
+&lt;h2 id="what-80-actually-solves"&gt;What 80% Actually Solves
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Battery stabilizes around &lt;strong&gt;3.9V&lt;/strong&gt; — the chemical degradation sweet spot&lt;/li&gt;
+&lt;li&gt;The 70–80% voltage range (3.8–3.9V) is where lithium-ion cells experience &lt;strong&gt;minimum stress&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Shallow cycling at ~10% depth of discharge causes &lt;strong&gt;near-zero electrode damage&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="but-i-unplug-my-mac-sometimes"&gt;&amp;ldquo;But I Unplug My Mac Sometimes&amp;rdquo;
+&lt;/h2&gt;&lt;p&gt;A common worry: &lt;em&gt;&amp;ldquo;With an 80% limit, every time I unplug to move rooms I&amp;rsquo;m using battery cycles.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This doesn&amp;rsquo;t matter:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &amp;ldquo;cycle&amp;rdquo; = cumulative discharge equal to full capacity&lt;/li&gt;
+&lt;li&gt;Losing 1–2% per unplug means you need &lt;strong&gt;50–100 unplugs&lt;/strong&gt; to complete one cycle&lt;/li&gt;
+&lt;li&gt;The calendar aging you &lt;strong&gt;prevent&lt;/strong&gt; by staying at 3.9V instead of 4.2V far outweighs these trivial shallow cycles&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="when-not-to-use-80"&gt;When NOT to Use 80%
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;❌ You&amp;rsquo;re regularly away from power all day → consider 85–90%&lt;/li&gt;
+&lt;li&gt;❌ You&amp;rsquo;re traveling and need maximum runtime → temporarily disable the limit&lt;/li&gt;
+&lt;li&gt;✅ You&amp;rsquo;re mostly at a desk with power → &lt;strong&gt;perfect scenario&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;✅ You carry a power bank → battery anxiety eliminated&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="long-term-storage"&gt;Long-Term Storage
+&lt;/h2&gt;&lt;p&gt;If you&amp;rsquo;re shelving a device for weeks or months, charge to &lt;strong&gt;50%&lt;/strong&gt; and power off. That&amp;rsquo;s the most chemically stable state for lithium-ion.&lt;/p&gt;
+&lt;h2 id="requirements"&gt;Requirements
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;macOS Sequoia+ or iOS 18+ (native charge limit settings)&lt;/li&gt;
+&lt;li&gt;Device usually near a power source&lt;/li&gt;
+&lt;li&gt;A power bank or multiple chargers for peace of mind&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

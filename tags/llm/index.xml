@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LLM on Mingjian</title><link>https://blog.mjshao.fun/tags/llm/</link><description>Recent content in LLM on Mingjian</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 25 Jan 2026 02:05:13 +0800</lastBuildDate><atom:link href="https://blog.mjshao.fun/tags/llm/index.xml" rel="self" type="application/rss+xml"/><item><title>SiliconLM</title><link>https://blog.mjshao.fun/p/siliconlm/</link><pubDate>Sun, 25 Jan 2026 02:05:13 +0800</pubDate><guid>https://blog.mjshao.fun/p/siliconlm/</guid><description>&lt;img src="https://blog.mjshao.fun/p/siliconlm/cover.png" alt="Featured image of post SiliconLM" /&gt;&lt;p&gt;&lt;img src="https://blog.mjshao.fun/p/siliconlm/cover.png"
+width="2384"
+height="1388"
+srcset="https://blog.mjshao.fun/p/siliconlm/cover_hu_885c3b1970a763a3.png 480w, https://blog.mjshao.fun/p/siliconlm/cover_hu_df57f7208a80cffc.png 1024w"
+loading="lazy"
+alt="SiliconLM Dashboard"
+class="gallery-image"
+data-flex-grow="171"
+data-flex-basis="412px"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Local LLM dashboard for Apple Silicon Macs. Manage models, services, embeddings, and downloads.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class="link" href="https://mjshao.fun/siliconlm/" target="_blank" rel="noopener"
+&gt;Project Website&lt;/a&gt; | &lt;a class="link" href="https://github.com/nxxxsooo/siliconlm" target="_blank" rel="noopener"
+&gt;GitHub Repository&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="features"&gt;Features
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Machine Info&lt;/strong&gt; - Chip, GPU cores, Neural Engine, RAM, disk at a glance&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MLX Embeddings Server&lt;/strong&gt; - OpenAI-compatible &lt;code&gt;/v1/embeddings&lt;/code&gt; API on port 8766&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-Backend Support&lt;/strong&gt; - MLX, mlx-lm (decoder models), sentence-transformers&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Service Management&lt;/strong&gt; - Start/stop LMStudio, MLX Embeddings, OpenCode&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Smart Proxy&lt;/strong&gt; - Routes &lt;code&gt;/v1/embeddings&lt;/code&gt; to MLX, &lt;code&gt;/v1/chat&lt;/code&gt; to LMStudio&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Model Downloads&lt;/strong&gt; - HuggingFace search + aria2 acceleration for large files&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Settings Panel&lt;/strong&gt; - Configure models directory, default embedding model&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="architecture"&gt;Architecture
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;CherryStudio / Client
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;http://localhost:8765/v1/* (SiliconLM Proxy)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ┌────┴────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼ ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/v1/embeddings /v1/chat/*
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼ ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;:8766 (MLX) :1234 (LMStudio)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ├─► MLX (bert, roberta)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ├─► mlx-lm (Qwen3, gte-Qwen2)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; └─► sentence-transformers (bge-m3)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="supported-embedding-models"&gt;Supported Embedding Models
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Model&lt;/th&gt;
+&lt;th&gt;Backend&lt;/th&gt;
+&lt;th&gt;Dimensions&lt;/th&gt;
+&lt;th&gt;Speed&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;mixedbread-ai/mxbai-embed-large-v1&lt;/td&gt;
+&lt;td&gt;MLX&lt;/td&gt;
+&lt;td&gt;1024&lt;/td&gt;
+&lt;td&gt;Fast&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;BAAI/bge-m3&lt;/td&gt;
+&lt;td&gt;sentence-transformers&lt;/td&gt;
+&lt;td&gt;1024&lt;/td&gt;
+&lt;td&gt;Medium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mlx-community/Qwen3-Embedding-0.6B-4bit&lt;/td&gt;
+&lt;td&gt;mlx-lm&lt;/td&gt;
+&lt;td&gt;1024&lt;/td&gt;
+&lt;td&gt;Fast&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mlx-community/Qwen3-Embedding-8B-4bit&lt;/td&gt;
+&lt;td&gt;mlx-lm&lt;/td&gt;
+&lt;td&gt;4096&lt;/td&gt;
+&lt;td&gt;Medium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mlx-community/gte-Qwen2-7B-instruct-4bit&lt;/td&gt;
+&lt;td&gt;mlx-lm&lt;/td&gt;
+&lt;td&gt;3584&lt;/td&gt;
+&lt;td&gt;Medium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="tech-stack"&gt;Tech Stack
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Component&lt;/th&gt;
+&lt;th&gt;Technology&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Backend&lt;/td&gt;
+&lt;td&gt;FastAPI + uvicorn&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Frontend&lt;/td&gt;
+&lt;td&gt;TailwindCSS + Vanilla JS&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Embeddings&lt;/td&gt;
+&lt;td&gt;MLX + mlx-lm + sentence-transformers&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Downloads&lt;/td&gt;
+&lt;td&gt;huggingface_hub + aria2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proxy&lt;/td&gt;
+&lt;td&gt;httpx async&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="license"&gt;License
+&lt;/h2&gt;&lt;p&gt;MIT&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Feishu on 明鉴的博客</title><link>https://blog.mjshao.fun/zh-cn/tags/feishu/</link><description>Recent content in Feishu on 明鉴的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 03 Feb 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://blog.mjshao.fun/zh-cn/tags/feishu/index.xml" rel="self" type="application/rss+xml"/><item><title>飞书：Markdown → Wiki 全流程</title><link>https://blog.mjshao.fun/zh-cn/p/feishu-markdown-wiki/</link><pubDate>Tue, 03 Feb 2026 00:00:00 +0800</pubDate><guid>https://blog.mjshao.fun/zh-cn/p/feishu-markdown-wiki/</guid><description>&lt;img src="https://blog.mjshao.fun/p/feishu-markdown-wiki/cover.png" alt="Featured image of post 飞书：Markdown → Wiki 全流程" /&gt;&lt;blockquote&gt;
+&lt;p&gt;本地 Markdown 上传到飞书 Wiki 的完整工作流，含 Mermaid 图表支持。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="概述"&gt;概述
+&lt;/h2&gt;&lt;p&gt;飞书&lt;strong&gt;没有直接的 &amp;ldquo;上传到 Wiki&amp;rdquo; API&lt;/strong&gt;。你必须先经过云文档，走一个 4 步流水线：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;步骤&lt;/th&gt;
+&lt;th&gt;操作&lt;/th&gt;
+&lt;th&gt;认证&lt;/th&gt;
+&lt;th&gt;备注&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;导入 Markdown → 云文档&lt;/td&gt;
+&lt;td&gt;TAT 或 UAT&lt;/td&gt;
+&lt;td&gt;创建的文档归应用所有&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;转移文档所有权给用户&lt;/td&gt;
+&lt;td&gt;TAT&lt;/td&gt;
+&lt;td&gt;Wiki 移动需要用户权限&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;移动云文档 → Wiki 节点&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;步骤 2 后等 3 秒！&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;修复 Mermaid 块&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;td&gt;把 type 2 → type 40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="前置条件"&gt;前置条件
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;飞书应用，具有 &lt;code&gt;wiki&lt;/code&gt;、&lt;code&gt;docx&lt;/code&gt;、&lt;code&gt;drive&lt;/code&gt; 权限&lt;/li&gt;
+&lt;li&gt;UAT（用户访问令牌）— 通过 OAuth 流程刷新&lt;/li&gt;
+&lt;li&gt;TAT（租户访问令牌）— 通过应用凭证获取&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;APP_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;cli_xxxxxxxxxxxxx&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;APP_SECRET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;your_app_secret&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;WIKI_SPACE_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;your_wiki_space_id&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;PARENT_NODE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;your_parent_node_token&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;USER_OPEN_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;your_user_open_id&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 获取 TAT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;TAT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;curl -s -X POST &lt;span class="s1"&gt;&amp;#39;https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s1"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;app_id\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$APP_ID&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;,\&amp;#34;app_secret\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$APP_SECRET&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;}&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;|&lt;/span&gt; python3 -c &lt;span class="s2"&gt;&amp;#34;import json,sys; print(json.load(sys.stdin)[&amp;#39;tenant_access_token&amp;#39;])&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 从缓存获取 UAT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;UAT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;python3 -c &lt;span class="s2"&gt;&amp;#34;import json; print(json.load(open(&amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/.feishu_token_cache.json&amp;#39;))[&amp;#39;access_token&amp;#39;])&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="步骤-1导入-markdown--云文档"&gt;步骤 1：导入 Markdown → 云文档
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/import&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$TAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s1"&gt;&amp;#39;{&amp;#34;markdown&amp;#34;: &amp;#34;# 你的文档\n\n内容...&amp;#34;, &amp;#34;file_name&amp;#34;: &amp;#34;我的文档&amp;#34;}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;已知限制&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mermaid 代码块会被扁平化为纯文本段落&lt;/li&gt;
+&lt;li&gt;最大文件大小：20MB&lt;/li&gt;
+&lt;li&gt;中文文本在某些场景下可能需要 Unicode 转义（&lt;code&gt;\uXXXX&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;输出&lt;/strong&gt;：返回 &lt;code&gt;doc_token&lt;/code&gt;，后续步骤使用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="步骤-2转移所有权给用户"&gt;步骤 2：转移所有权给用户
+&lt;/h2&gt;&lt;p&gt;导入操作创建的文档归应用所有。移动到 Wiki 需要用户所有权。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/drive/v1/permissions/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/members/transfer_owner?type=docx&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$TAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;member_type\&amp;#34;:\&amp;#34;openid\&amp;#34;,\&amp;#34;member_id\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$USER_OPEN_ID&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 TAT（应用转移给用户）&lt;/li&gt;
+&lt;li&gt;如果用户已经是所有者，返回错误码 &lt;code&gt;1063002&lt;/code&gt; — 可安全忽略&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;⚠️ 关键&lt;/strong&gt;：此步骤后等 3 秒再进行下一步！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sleep &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="c1"&gt;# 不要跳过 — 否则 Wiki 移动会失败&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="步骤-3移动云文档--wiki-节点"&gt;步骤 3：移动云文档 → Wiki 节点
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X POST &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/wiki/v2/spaces/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;WIKI_SPACE_ID&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/nodes/move_docs_to_wiki&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;parent_wiki_token\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$PARENT_NODE&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;,\&amp;#34;obj_type\&amp;#34;:\&amp;#34;docx\&amp;#34;,\&amp;#34;obj_token\&amp;#34;:\&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$DOC_TOKEN&lt;/span&gt;&lt;span class="s2"&gt;\&amp;#34;}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;strong&gt;UAT&lt;/strong&gt; — 用户必须是文档所有者&lt;/li&gt;
+&lt;li&gt;返回 &lt;code&gt;wiki_token&lt;/code&gt;（不同于 &lt;code&gt;doc_token&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;如果丢失了 &lt;code&gt;wiki_token&lt;/code&gt;，可以后续查询：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -X GET &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/wiki/v2/spaces/get_node?token=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;amp;obj_type=docx&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="步骤-4修复-mermaid-块"&gt;步骤 4：修复 Mermaid 块
+&lt;/h2&gt;&lt;p&gt;Mermaid 代码块被导入为纯文本段落（&lt;code&gt;block_type=2&lt;/code&gt;）。需要把它们替换成原生 Mermaid 图表块（&lt;code&gt;block_type=40&lt;/code&gt;）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;⚠️ 从下往上处理&lt;/strong&gt;，避免删除后索引偏移。&lt;/p&gt;
+&lt;h3 id="4a-查找被扁平化的-mermaid-块"&gt;4a. 查找被扁平化的 Mermaid 块
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -s -X GET &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/blocks?page_size=200&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; python3 -c &lt;span class="s2"&gt;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;import json, sys
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;data = json.load(sys.stdin)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;for item in data[&amp;#39;data&amp;#39;][&amp;#39;items&amp;#39;]:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; if item.get(&amp;#39;block_type&amp;#39;) != 2: continue
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; for el in item.get(&amp;#39;text&amp;#39;, {}).get(&amp;#39;elements&amp;#39;, []):
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; content = el.get(&amp;#39;text_run&amp;#39;, {}).get(&amp;#39;content&amp;#39;, &amp;#39;&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; if any(kw in content for kw in [&amp;#39;graph TD&amp;#39;, &amp;#39;graph LR&amp;#39;, &amp;#39;flowchart&amp;#39;, &amp;#39;sequenceDiagram&amp;#39;]):
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; print(f&amp;#39;FOUND: {item[\&amp;#34;block_id\&amp;#34;]} | {content[:100]}&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;识别方式：段落（&lt;code&gt;type=2&lt;/code&gt;）中包含箭头模式（&lt;code&gt;--&amp;gt;&lt;/code&gt;）加上 Mermaid 关键词（&lt;code&gt;graph&lt;/code&gt;、&lt;code&gt;flowchart&lt;/code&gt;、&lt;code&gt;subgraph&lt;/code&gt;）。&lt;/p&gt;
+&lt;h3 id="4b-获取块索引"&gt;4b. 获取块索引
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -s -X GET &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/blocks/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; python3 -c &lt;span class="s2"&gt;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;import json, sys
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;data = json.load(sys.stdin)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;children = data[&amp;#39;data&amp;#39;][&amp;#39;block&amp;#39;][&amp;#39;children&amp;#39;]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;target = &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;BLOCK_ID&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;for i, c in enumerate(children):
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; if c == target:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; print(f&amp;#39;Index: {i}&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="4c-创建-mermaid-图表块"&gt;4c. 创建 Mermaid 图表块
+&lt;/h3&gt;&lt;p&gt;Mermaid 块的关键结构：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;block_type&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;add_ons&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;component_type_id&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;blk_631fefbbae02400430b8f9f4&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;record&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;data\&amp;#34;:\&amp;#34;graph TD\\n A --&amp;gt; B\&amp;#34;,\&amp;#34;theme\&amp;#34;:\&amp;#34;default\&amp;#34;,\&amp;#34;view\&amp;#34;:\&amp;#34;chart\&amp;#34;}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;component_type_id&lt;/code&gt; 固定为：&lt;code&gt;blk_631fefbbae02400430b8f9f4&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;record&lt;/code&gt; 是 &lt;strong&gt;JSON 字符串&lt;/strong&gt;（请求体中双重编码）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;record.data&lt;/code&gt;：原始 Mermaid 代码，&lt;code&gt;\n&lt;/code&gt; 表示换行&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;record.view&lt;/code&gt;：&lt;code&gt;&amp;quot;chart&amp;quot;&lt;/code&gt; 渲染图表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;RECORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;python3 -c &lt;span class="s2"&gt;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;import json
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;data = {&amp;#39;data&amp;#39;: &amp;#39;&amp;#39;&amp;#39;graph LR
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; A --&amp;gt; B --&amp;gt; C&amp;#39;&amp;#39;&amp;#39;, &amp;#39;theme&amp;#39;: &amp;#39;default&amp;#39;, &amp;#39;view&amp;#39;: &amp;#39;chart&amp;#39;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;print(json.dumps(json.dumps(data, ensure_ascii=False)))
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -s -X POST &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/blocks/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/children&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;children\&amp;#34;: [{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;block_type\&amp;#34;: 40,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;add_ons\&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;component_type_id\&amp;#34;: \&amp;#34;blk_631fefbbae02400430b8f9f4\&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;record\&amp;#34;: &lt;/span&gt;&lt;span class="nv"&gt;$RECORD&lt;/span&gt;&lt;span class="s2"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; }],
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; \&amp;#34;index\&amp;#34;: &lt;/span&gt;&lt;span class="k"&gt;$((&lt;/span&gt;BLOCK_INDEX &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;))&lt;/span&gt;&lt;span class="s2"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; }&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="4d-删除旧的扁平化文本块"&gt;4d. 删除旧的扁平化文本块
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -s -X DELETE &lt;span class="s2"&gt;&amp;#34;https://open.feishu.cn/open-apis/docx/v1/documents/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/blocks/&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOC_TOKEN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/children/batch_delete&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Authorization: Bearer &lt;/span&gt;&lt;span class="nv"&gt;$UAT&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -H &lt;span class="s2"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="s2"&gt;&amp;#34;{\&amp;#34;start_index\&amp;#34;: &lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;BLOCK_INDEX&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;, \&amp;#34;end_index\&amp;#34;: &lt;/span&gt;&lt;span class="k"&gt;$((&lt;/span&gt;BLOCK_INDEX &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;))&lt;/span&gt;&lt;span class="s2"&gt;}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="record-编码辅助"&gt;Record 编码辅助
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;mermaid_code&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&amp;#34;&amp;#34;graph TD
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; A[开始] --&amp;gt; B[处理]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; B --&amp;gt; C&lt;/span&gt;&lt;span class="si"&gt;{判断}&lt;/span&gt;&lt;span class="s2"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; C --&amp;gt;|是| D[结束]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; C --&amp;gt;|否| B&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;record&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;data&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mermaid_code&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;theme&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;default&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s2"&gt;&amp;#34;view&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;chart&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="n"&gt;ensure_ascii&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# curl 请求体中需要双重编码：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;request_record&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="块类型参考"&gt;块类型参考
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;备注&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;页面（根）&lt;/td&gt;
+&lt;td&gt;文档根节点&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;文本/段落&lt;/td&gt;
+&lt;td&gt;Mermaid 被扁平化到这里&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3-8&lt;/td&gt;
+&lt;td&gt;标题 1-6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;无序列表&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;有序列表&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;代码块&lt;/td&gt;
+&lt;td&gt;仅语法高亮 — &lt;strong&gt;不渲染 Mermaid&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;引用&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;高亮块&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;31&lt;/td&gt;
+&lt;td&gt;表格&lt;/td&gt;
+&lt;td&gt;包含 type-32 的表格单元格子节点&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;40&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;插件块&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Mermaid 图表在这里&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="api-端点汇总"&gt;API 端点汇总
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;步骤&lt;/th&gt;
+&lt;th&gt;方法&lt;/th&gt;
+&lt;th&gt;端点&lt;/th&gt;
+&lt;th&gt;认证&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;导入&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/import&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;TAT 或 UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;转移&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/drive/v1/permissions/{token}/members/transfer_owner?type=docx&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;TAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;移到 Wiki&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/wiki/v2/spaces/{space_id}/nodes/move_docs_to_wiki&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;列出块&lt;/td&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/{doc_id}/blocks&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;获取块&lt;/td&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/{doc_id}/blocks/{block_id}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;创建块&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/{doc_id}/blocks/{parent_id}/children&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;删除块&lt;/td&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/docx/v1/documents/{doc_id}/blocks/{parent_id}/children/batch_delete&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;获取 Wiki 节点&lt;/td&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/open-apis/wiki/v2/spaces/get_node?token={token}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="踩坑与经验"&gt;踩坑与经验
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;问题&lt;/th&gt;
+&lt;th&gt;解决方案&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;转移所有权后 Wiki 移动失败&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;转移和移动之间等 3 秒&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Mermaid 被扁平化为纯文本&lt;/td&gt;
+&lt;td&gt;用块 API 后处理（type 40）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;代码块（type 14）不渲染 Mermaid&lt;/td&gt;
+&lt;td&gt;必须用 type 40 插件块&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PATCH 无法改变 block_type&lt;/td&gt;
+&lt;td&gt;新建块 + 删旧块&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;删除后块索引偏移&lt;/td&gt;
+&lt;td&gt;从下往上处理&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;record&lt;/code&gt; 字段编码&lt;/td&gt;
+&lt;td&gt;双重编码：&lt;code&gt;json.dumps(json.dumps(data))&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;丢失 wiki_token&lt;/td&gt;
+&lt;td&gt;通过 &lt;code&gt;get_node?token={doc_token}&amp;amp;obj_type=docx&lt;/code&gt; 找回&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TAT 无法移动文档到 Wiki&lt;/td&gt;
+&lt;td&gt;先转移所有权，再用 UAT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;API 请求体中的中文&lt;/td&gt;
+&lt;td&gt;某些端点需要 &lt;code&gt;\uXXXX&lt;/code&gt; 转义&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Wiki 节点删除&lt;/td&gt;
+&lt;td&gt;不支持 API 删除 — 只能手动&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</description></item></channel></rss>
