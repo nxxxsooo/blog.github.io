@@ -4,6 +4,7 @@ title: "为什么我把充电上限设在 80%"
 description: "锂电池老化的科学原理，以及 MacBook 和 iPhone 的实用充电策略。"
 slug: "battery-charging-strategy"
 date: 2026-02-06T00:00:00+08:00
+image: cover.png
 categories:
     - Tech
 tags:

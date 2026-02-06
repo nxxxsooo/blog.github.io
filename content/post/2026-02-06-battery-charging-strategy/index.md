@@ -4,6 +4,7 @@ title: "Why I Cap My Batteries at 80%"
 description: "The science behind lithium-ion degradation and a practical charging strategy for MacBook and iPhone."
 slug: "battery-charging-strategy"
 date: 2026-02-06T00:00:00+08:00
+image: cover.png
 categories:
     - Tech
 tags:
