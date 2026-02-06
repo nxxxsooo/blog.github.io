@@ -1,5 +1,5 @@
 # Change baseurl before deploy
-baseurl = "https://nxxxsooo.github.io"
+baseurl = "https://blog.mjshao.fun"
 languageCode = "en-us"
 title = "Mingjian"
 
